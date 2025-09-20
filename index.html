@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="Ленинград, блокада, Санкт-Петербург, история, маршруты, объекты, музей, фронтенд, учебный проект" />
+  <meta name="description" content="Учебный макет главной страницы проекта «Ленинград после Победы» для лабораторной №1 (только HTML, без CSS)." />
+  <title>Ленинград после Победы — Главная (HTML‑макет)</title>
+</head>
+<body>
+  <header>
+    <a href="#hero" title="К началу">Ленинград после Победы</a>
+    <nav aria-label="Основная навигация">
+      <ul>
+        <li><a href="#hero">Главная</a></li>
+        <li><a href="#map">Карта</a></li>
+        <li><a href="#objects">Объекты</a></li>
+        <li><a href="#routes">Маршруты</a></li>
+        <li><a href="#video">Видео</a></li>
+        <li><a href="#about">О проекте</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="hero">
+    <section aria-labelledby="site-title">
+      <h1 id="site-title">Ленинград после Победы</h1>
+      <h2>История города в трех эпохах</h2>
+      <p>
+        <strong>Цель проекта</strong> — показать, как менялся <em>исторический облик</em> города до блокады, во время и после нее.
+      </p>
+      <p>
+        Этот макет выполнен <ins>только на HTML</ins> (без CSS и JS). Ранее страница выглядела иначе <del>(с анимациями и каруселями)</del>.
+      </p>
+      <figure>
+        <img src="https://via.placeholder.com/1000x400?text=Обложка+проекта" alt="Обложка проекта: панорама Невского проспекта" />
+        <figcaption>Обложка проекта. Изображение‑заглушка.</figcaption>
+      </figure>
+      <aside aria-label="Быстрые ссылки">
+        <h3>Быстрые ссылки</h3>
+        <ul>
+          <li><a href="#objects">Перейти к объектам</a></li>
+          <li><a href="#routes">Открыть маршруты</a></li>
+          <li><a href="#video">Смотреть видео</a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="map" aria-labelledby="map-title">
+      <h2 id="map-title">Карта</h2>
+      <p>Интерактивная карта в учебном макете заменена статичной картинкой.</p>
+      <figure>
+        <img src="https://via.placeholder.com/900x400?text=Заглушка+карты" alt="Статичное изображение карты Санкт‑Петербурга" />
+        <figcaption>Карта объектов (заглушка).</figcaption>
+      </figure>
+      <article>
+        <h3>Как пользоваться картой</h3>
+        <ol>
+          <li>Выберите интересующий район.</li>
+          <li>Откройте карточку объекта.</li>
+          <li>Перейдите к маршруту, чтобы построить путь.</li>
+        </ol>
+      </article>
+    </section>
+
+    <section id="objects" aria-labelledby="objects-title">
+      <h2 id="objects-title">Объекты</h2>
+      <article aria-labelledby="obj1-title">
+        <header>
+          <h3 id="obj1-title">Государственный Эрмитаж</h3>
+          <p><time datetime="1764">1764</time> — год основания коллекции.</p>
+        </header>
+        <figure>
+          <img src="https://via.placeholder.com/600x350?text=До+блокады" alt="Эрмитаж до блокады, архивное фото" />
+          <figcaption>Эрмитаж до блокады.</figcaption>
+        </figure>
+        <figure>
+          <img src="https://via.placeholder.com/600x350?text=После+блокады" alt="Эрмитаж после блокады, восстановительные работы" />
+          <figcaption>Эрмитаж после блокады.</figcaption>
+        </figure>
+        <p>
+          Краткое описание объекта и его роли в истории города. Важные факты выделены тегами <strong>strong</strong> и <em>em</em>.
+        </p>
+        <aside>
+          <h4>Интересные факты</h4>
+          <ul>
+            <li>Экспонаты эвакуировались с первых дней войны.</li>
+            <li>Залы музея служили укрытием для жителей.</li>
+          </ul>
+        </aside>
+      </article>
+      <article aria-labelledby="obj2-title">
+        <header>
+          <h3 id="obj2-title">Адмиралтейство</h3>
+        </header>
+        <p>Ключевой ориентир центра города и важный памятник архитектуры.</p>
+        <figure>
+          <img src="https://via.placeholder.com/600x350?text=Настоящее+время" alt="Адмиралтейство в наше время" />
+          <figcaption>Адмиралтейство сегодня.</figcaption>
+        </figure>
+      </article>
+    </section>
+
+    <section id="routes" aria-labelledby="routes-title">
+      <h2 id="routes-title">Маршруты</h2>
+      <p>Подборки точек по темам и эпохам.</p>
+      <nav aria-label="Список маршрутов">
+        <ul>
+          <li><a href="#route1">«До блокады»</a></li>
+          <li><a href="#route2">«Во время блокады»</a></li>
+          <li><a href="#route3">«После блокады»</a></li>
+        </ul>
+      </nav>
+      <article id="route1" aria-labelledby="route1-title">
+        <h3 id="route1-title">Маршрут «До блокады»</h3>
+        <p>Краткое описание и список остановок:</p>
+        <ol>
+          <li>Площадь Дворцовая</li>
+          <li>Невский проспект</li>
+          <li>Стрелка Васильевского острова</li>
+        </ol>
+      </article>
+      <article id="route2" aria-labelledby="route2-title">
+        <h3 id="route2-title">Маршрут «Во время блокады»</h3>
+        <p>Истории жителей и ключевые места, связанные с обороной города.</p>
+      </article>
+      <article id="route3" aria-labelledby="route3-title">
+        <h3 id="route3-title">Маршрут «После блокады»</h3>
+        <p>Восстановление и культурная жизнь послевоенного Ленинграда.</p>
+      </article>
+    </section>
+
+    <section id="video" aria-labelledby="video-title">
+      <h2 id="video-title">Видео</h2>
+      <p>В полном приложении здесь встроенный плеер. В учебном макете — описание и постер.</p>
+      <figure>
+        <img src="https://via.placeholder.com/800x450?text=Постер+видео" alt="Постер видео о восстановлении города" />
+        <figcaption>Постер видео.</figcaption>
+      </figure>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">О проекте</h2>
+      <p>Проект исследует город через призму времени, объединяя тексты, фото и маршруты.</p>
+      <blockquote cite="https://ru.wikipedia.org/wiki/Блокада_Ленинграда">
+        «Никто не забыт и ничто не забыто».
+        <cite> — народная эпитафия, посвященная блокаде Ленинграда</cite>
+      </blockquote>
+      <h3>Немного кода</h3>
+      <p>Ниже пример запроса данных об объекте (из реального приложения), оформленный тегами pre и code:</p>
+      <pre><code>// Пример: получение объекта по id (псевдокод)
+fetch("https://leningrad-after-the-victory.ru/api/attractions/attraction/42")
+  .then(response =&gt; response.json())
+  .then(data =&gt; {
+    console.log(data.name);
+  });
+      </code></pre>
+      <h3>Контакты</h3>
+      <address>
+        E-mail: <a href="mailto:team@lenvictory.example">team@lenvictory.example</a><br />
+        Телефон: <a href="tel:+78120000000">+7 (812) 000-00-00</a><br />
+        Санкт‑Петербург, Невский проспект, 1
+      </address>
+    </section>
+  </main>
+
+  <footer>
+    <nav aria-label="Вторичная навигация">
+      <ul>
+        <li><a href="#hero">Наверх</a></li>
+        <li><a href="#about">О проекте</a></li>
+        <li><a href="#objects">Объекты</a></li>
+      </ul>
+    </nav>
+    <p><small>© <time datetime="2025">2025</time> «Ленинград после Победы». Учебный макет для лабораторной №1.</small></p>
+  </footer>
+</body>
+</html>
