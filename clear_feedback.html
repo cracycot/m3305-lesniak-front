@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Очистка localStorage</title>
+</head>
+<body>
+  <h1>Очистка отзывов</h1>
+  <button onclick="clearStorage()">Очистить localStorage</button>
+  <p id="result"></p>
+  
+  <script>
+    function clearStorage() {
+      localStorage.removeItem('leningrad_feedback_items');
+      document.getElementById('result').textContent = '✅ LocalStorage очищен! Теперь перейдите на страницу обратной связи.';
+      setTimeout(() => {
+        window.location.href = 'feedback.html';
+      }, 1500);
+    }
+    
+    const count = localStorage.getItem('leningrad_feedback_items');
+    if (count) {
+      const items = JSON.parse(count);
+      document.getElementById('result').textContent = `Сейчас в storage: ${items.length} отзывов`;
+    } else {
+      document.getElementById('result').textContent = 'Storage пуст';
+    }
+  </script>
+</body>
+</html>

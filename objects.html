@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="Ленинград, блокада, объекты, достопримечательности, музеи" />
+  <meta name="description" content="Исторические объекты Ленинграда — список памятников и достопримечательностей." />
+  <title>Объекты — Ленинград после Победы</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <script src="scripts/main.js" defer></script>
+  <script src="scripts/objects.js" defer></script>
+</head>
+<body>
+  <header>
+    <a href="index.html" title="На главную">Ленинград после Победы</a>
+    <nav aria-label="Основная навигация">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="objects.html">Объекты</a></li>
+        <li><a href="about.html">О проекте</a></li>
+        <li><a href="feedback.html">Обратная связь</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-labelledby="objects-title">
+      <h1 id="objects-title">Исторические объекты</h1>
+      <p>Коллекция значимых мест Ленинграда с историей их восстановления после войны.</p>
+      
+      <div id="loader" class="loader" style="display: none;">
+        <div class="loader__spinner"></div>
+        <p>Загрузка данных об объектах...</p>
+      </div>
+      
+      <div id="error-message" class="error-message" style="display: none;">
+        <h3>⚠️ Ошибка загрузки</h3>
+        <p id="error-text"></p>
+        <button id="retry-button" class="retry-button">Попробовать снова</button>
+      </div>
+      
+      <div id="objects-container" class="objects-grid">
+        
+        <article aria-labelledby="obj1-title">
+          <header>
+            <h3 id="obj1-title">Государственный Эрмитаж</h3>
+            <p><time datetime="1764">1764</time> — год основания коллекции.</p>
+          </header>
+          <figure>
+            <img src="images/hermit.png" alt="Эрмитаж до блокады" />
+            <figcaption>Эрмитаж до блокады.</figcaption>
+          </figure>
+          <p>
+            Крупнейший художественный музей мира. Во время блокады экспонаты были эвакуированы, 
+            залы служили укрытием для жителей. После войны начались масштабные восстановительные работы.
+          </p>
+          <aside>
+            <h4>Интересные факты</h4>
+            <ul>
+              <li>Экспонаты эвакуировались с первых дней войны.</li>
+              <li>Залы музея служили укрытием для жителей.</li>
+              <li>Кошки Эрмитажа спасали музей от грызунов.</li>
+            </ul>
+          </aside>
+        </article>
+
+        <article aria-labelledby="obj2-title">
+          <header>
+            <h3 id="obj2-title">Адмиралтейство</h3>
+            <p><time datetime="1704">1704</time> — год основания.</p>
+          </header>
+          <figure>
+            <img src="images/hermitage3.1.png" alt="Адмиралтейство сегодня" />
+            <figcaption>Адмиралтейство в наше время.</figcaption>
+          </figure>
+          <p>
+            Ключевой ориентир центра города и важный памятник архитектуры. 
+            Здание было замаскировано во время блокады для защиты от бомбардировок.
+          </p>
+        </article>
+
+        <article aria-labelledby="obj3-title">
+          <header>
+            <h3 id="obj3-title">Исаакиевский собор</h3>
+            <p><time datetime="1858">1858</time> — год освящения.</p>
+          </header>
+          <figure>
+            <img src="images/landmark1.png" alt="Исаакиевский собор" />
+            <figcaption>Исаакиевский собор.</figcaption>
+          </figure>
+          <p>
+            Крупнейший православный храм Санкт-Петербурга. Во время войны в соборе 
+            находились ценности из пригородных дворцов.
+          </p>
+        </article>
+
+        <article aria-labelledby="obj4-title">
+          <header>
+            <h3 id="obj4-title">Петропавловская крепость</h3>
+            <p><time datetime="1703">1703</time> — год основания.</p>
+          </header>
+          <figure>
+            <img src="images/landmark2.png" alt="Петропавловская крепость" />
+            <figcaption>Петропавловская крепость.</figcaption>
+          </figure>
+          <p>
+            Историческое ядро города, заложенное Петром I. Во время блокады 
+            использовалась для обороны города.
+          </p>
+        </article>
+      </div>
+
+      <template id="object-template">
+        <article class="object-card">
+          <header>
+            <h3 class="object-title"></h3>
+          </header>
+          <div class="object-body">
+            <p class="object-description"></p>
+          </div>
+          <footer class="object-footer">
+            <small class="object-id"></small>
+          </footer>
+        </article>
+      </template>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <button id="load-more-button" class="load-more-button">
+          Загрузить дополнительные объекты из API
+        </button>
+      </div>
+
+      <article>
+        <h2>Статистика восстановления</h2>
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Объект</th>
+              <th>Повреждения</th>
+              <th>Начало восстановления</th>
+              <th>Завершение</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Эрмитаж</td>
+              <td>Средние</td>
+              <td><time datetime="1945">1945</time></td>
+              <td><time datetime="1950">1950</time></td>
+            </tr>
+            <tr>
+              <td>Петергоф</td>
+              <td>Критические</td>
+              <td><time datetime="1944">1944</time></td>
+              <td><time datetime="2003">2003</time></td>
+            </tr>
+            <tr>
+              <td>Царское Село</td>
+              <td>Критические</td>
+              <td><time datetime="1945">1945</time></td>
+              <td>Продолжается</td>
+            </tr>
+            <tr>
+              <td>Исаакиевский собор</td>
+              <td>Минимальные</td>
+              <td><time datetime="1945">1945</time></td>
+              <td><time datetime="1948">1948</time></td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <nav aria-label="Вторичная навигация">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">О проекте</a></li>
+        <li><a href="objects.html">Объекты</a></li>
+        <li><a href="feedback.html">Обратная связь</a></li>
+      </ul>
+    </nav>
+    <p><small>© <time datetime="2025">2025</time> «Ленинград после Победы». Учебный проект.</small></p>
+  </footer>
+</body>
+</html>

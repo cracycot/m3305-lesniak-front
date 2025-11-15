@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="keywords" content="Ленинград, обратная связь, отзывы, комментарии" />
+  <meta name="description" content="Оставьте свой отзыв о проекте «Ленинград после Победы»" />
+  <title>Обратная связь — Ленинград после Победы</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/feedback.css" />
+  <script src="scripts/main.js" defer></script>
+  <script src="scripts/feedback.js" defer></script>
+</head>
+<body>
+  <header>
+    <a href="index.html" title="На главную">Ленинград после Победы</a>
+    <nav aria-label="Основная навигация">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="objects.html">Объекты</a></li>
+        <li><a href="about.html">О проекте</a></li>
+        <li><a href="feedback.html">Обратная связь</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-labelledby="feedback-title">
+      <h1 id="feedback-title">Обратная связь</h1>
+      <p>Поделитесь своим мнением о проекте. Все отзывы сохраняются и помогают нам становиться лучше!</p>
+
+      <div class="feedback-container">
+        
+        <article class="feedback-form-wrapper">
+          <h2>Оставить отзыв</h2>
+          
+          <form id="feedback-form" class="feedback-form" novalidate>
+            <div class="form-group">
+              <label for="name">
+                Ваше имя <span class="required">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                minlength="2"
+                maxlength="50"
+                placeholder="Иван Иванов"
+                autocomplete="name"
+              />
+              <span class="error-message" id="name-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">
+                Email <span class="required">*</span>
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                placeholder="example@mail.ru"
+                autocomplete="email"
+              />
+              <span class="error-message" id="email-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">
+                Телефон
+              </label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                pattern="[+]?[0-9]{10,15}"
+                placeholder="+7 (999) 123-45-67"
+                autocomplete="tel"
+              />
+              <span class="error-message" id="phone-error"></span>
+              <small class="field-hint">Необязательно, формат: +79991234567</small>
+            </div>
+
+            <div class="form-group">
+              <label for="category">
+                Категория отзыва <span class="required">*</span>
+              </label>
+              <select id="category" name="category" required>
+                <option value="">Выберите категорию</option>
+                <option value="positive">Положительный отзыв</option>
+                <option value="suggestion">Предложение</option>
+                <option value="issue">Сообщение о проблеме</option>
+                <option value="question">Вопрос</option>
+                <option value="other">Другое</option>
+              </select>
+              <span class="error-message" id="category-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="rating">
+                Оценка проекта <span class="required">*</span>
+              </label>
+              <div class="rating-input">
+                <input type="radio" id="rating-5" name="rating" value="5" required />
+                <label for="rating-5" title="Отлично">⭐️⭐️⭐️⭐️⭐️</label>
+                
+                <input type="radio" id="rating-4" name="rating" value="4" />
+                <label for="rating-4" title="Хорошо">⭐️⭐️⭐️⭐️</label>
+                
+                <input type="radio" id="rating-3" name="rating" value="3" />
+                <label for="rating-3" title="Нормально">⭐️⭐️⭐️</label>
+                
+                <input type="radio" id="rating-2" name="rating" value="2" />
+                <label for="rating-2" title="Плохо">⭐️⭐️</label>
+                
+                <input type="radio" id="rating-1" name="rating" value="1" />
+                <label for="rating-1" title="Очень плохо">⭐️</label>
+              </div>
+              <span class="error-message" id="rating-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">
+                Ваш отзыв <span class="required">*</span>
+              </label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="5" 
+                required
+                minlength="10"
+                maxlength="1000"
+                placeholder="Расскажите, что вы думаете о проекте..."
+              ></textarea>
+              <span class="error-message" id="message-error"></span>
+              <small class="field-hint character-count">
+                <span id="char-count">0</span> / 1000 символов
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input 
+                  type="checkbox" 
+                  id="agree" 
+                  name="agree" 
+                  required
+                />
+                <span>
+                  Я согласен с <a href="#" target="_blank">политикой обработки персональных данных</a> 
+                  <span class="required">*</span>
+                </span>
+              </label>
+              <span class="error-message" id="agree-error"></span>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                Отправить отзыв
+              </button>
+              <button type="reset" class="btn btn-secondary">
+                Очистить форму
+              </button>
+            </div>
+          </form>
+        </article>
+
+        <article class="feedback-list-wrapper">
+          <div class="feedback-list-header">
+            <h2>Отзывы посетителей</h2>
+            <div class="feedback-stats">
+              <span>Всего отзывов: <strong id="feedback-count">0</strong></span>
+              <button id="clear-all-button" class="btn btn-danger btn-sm">
+                Очистить все
+              </button>
+            </div>
+          </div>
+          
+          <div id="feedback-list" class="feedback-list">
+            
+            <p class="no-feedback">Пока нет отзывов. Будьте первым!</p>
+          </div>
+        </article>
+      </div>
+
+      <template id="feedback-item-template">
+        <div class="feedback-item" data-id="">
+          <div class="feedback-item-header">
+            <div class="feedback-author">
+              <strong class="author-name"></strong>
+              <span class="feedback-rating"></span>
+            </div>
+            <div class="feedback-meta">
+              <time class="feedback-date"></time>
+              <span class="feedback-category"></span>
+            </div>
+          </div>
+          <div class="feedback-item-body">
+            <p class="feedback-message"></p>
+          </div>
+          <div class="feedback-item-footer">
+            <button class="btn-edit" title="Редактировать">✏️ Редактировать</button>
+            <button class="btn-delete" title="Удалить">🗑️ Удалить</button>
+          </div>
+        </div>
+      </template>
+    </section>
+  </main>
+
+  <footer>
+    <nav aria-label="Вторичная навигация">
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">О проекте</a></li>
+        <li><a href="objects.html">Объекты</a></li>
+        <li><a href="feedback.html">Обратная связь</a></li>
+      </ul>
+    </nav>
+    <p><small>© <time datetime="2025">2025</time> «Ленинград после Победы». Учебный проект.</small></p>
+  </footer>
+</body>
+</html>

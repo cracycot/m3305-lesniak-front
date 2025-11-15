@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тест localStorage</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    button { padding: 10px 20px; margin: 10px; cursor: pointer; }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Диагностика отзывов</h1>
+  
+  <button onclick="checkStorage()">Проверить Storage</button>
+  <button onclick="addTestFeedback()">Добавить тестовый отзыв</button>
+  <button onclick="clearStorage()">Очистить</button>
+  <button onclick="goToFeedback()">К форме обратной связи</button>
+  
+  <div id="result"></div>
+  
+  <script>
+    const STORAGE_KEY = 'leningrad_feedback_items';
+    
+    function checkStorage() {
+      const data = localStorage.getItem(STORAGE_KEY);
+      const result = document.getElementById('result');
+      
+      if (data) {
+        const items = JSON.parse(data);
+        result.innerHTML = `<p class="success">✅ Найдено ${items.length} отзывов:</p>`;
+        items.forEach(item => {
+          result.innerHTML += `<p>• ${item.name} (${item.rating}⭐)</p>`;
+        });
+      } else {
+        result.innerHTML = '<p class="error">❌ Storage пуст</p>';
+      }
+    }
+    
+    function addTestFeedback() {
+      const mockFeedbacks = [
+        {
+          id: Date.now() + '_1',
+          name: 'Анна Петрова',
+          email: 'anna@example.com',
+          phone: '+7 (921) 555-12-34',
+          category: 'positive',
+          rating: '5',
+          message: 'Отличный проект! Очень интересно узнать историю города через призму времени.',
+          date: new Date().toISOString(),
+          agree: true
+        },
+        {
+          id: Date.now() + '_2',
+          name: 'Дмитрий Соколов',
+          email: 'dmitry@example.com',
+          phone: '',
+          category: 'suggestion',
+          rating: '4',
+          message: 'Хороший проект, но хотелось бы видеть больше информации о конкретных объектах.',
+          date: new Date().toISOString(),
+          agree: true
+        },
+        {
+          id: Date.now() + '_3',
+          name: 'Мария Иванова',
+          email: 'maria@example.com',
+          phone: '+7 (812) 333-44-55',
+          category: 'positive',
+          rating: '5',
+          message: 'Замечательная идея! Очень важно сохранять память о тех страшных событиях.',
+          date: new Date().toISOString(),
+          agree: true
+        }
+      ];
+      
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(mockFeedbacks));
+      document.getElementById('result').innerHTML = '<p class="success">✅ Добавлено 3 тестовых отзыва!</p>';
+      checkStorage();
+    }
+    
+    function clearStorage() {
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById('result').innerHTML = '<p class="success">✅ Storage очищен</p>';
+    }
+    
+    function goToFeedback() {
+      window.location.href = 'feedback.html';
+    }
+    
+    // Автоматическая проверка при загрузке
+    window.onload = checkStorage;
+  </script>
+</body>
+</html>
