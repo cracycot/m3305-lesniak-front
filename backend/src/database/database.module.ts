@@ -12,7 +12,9 @@ import { parse } from 'pg-connection-string';
                 const url = config.get<string>('DATABASE_URL') ?? '';
                 const conn = parse(url);
                 const isProduction = config.get('NODE_ENV') === 'production';
-                const sslDisabled = url.includes('sslmode=disable');
+                const sslDisabled =
+                    config.get<string>('DATABASE_SSL_DISABLE') === '1' ||
+                    url.includes('sslmode=disable');
                 return {
                     type: 'postgres',
                     host: conn.host ?? 'localhost',

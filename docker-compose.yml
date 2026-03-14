@@ -24,6 +24,7 @@ services:
       - "0.0.0.0:3080:3080"
     environment:
       PORT: "3080"
+      DATABASE_SSL_DISABLE: "1"
       DATABASE_URL: postgresql://postgres:postgres@db:5432/leningrad?sslmode=disable
     depends_on:
       db:
