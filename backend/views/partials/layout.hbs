@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    {{> head}}
+</head>
+
+<body>
+    {{> header}}
+
+    <main>
+        {{> @partial-block}}
+    </main>
+
+    {{> footer}}
+    <script src="/scripts/main.js" defer></script>
+    {{#if sseEnabled}}
+    <script src="/scripts/sse.js" defer></script>
+    {{/if}}
+    {{#if feedbackPage}}
+    <script src="/scripts/feedback.js" defer></script>
+    {{/if}}
+</body>
+
+</html>

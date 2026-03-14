@@ -1,0 +1,47 @@
+{{#> layout}}
+<section aria-labelledby="feedback-title">
+    <h1 id="feedback-title">Обратная связь</h1>
+    <p>Поделитесь своим мнением о проекте. Все отзывы сохраняются и помогают нам становиться лучше!</p>
+
+    {{#if sent}}
+    <div class="alert alert-success" role="alert">
+        Спасибо за ваш отзыв! Мы обязательно его прочтём.
+    </div>
+    {{/if}}
+
+    <form method="POST" action="/feedback" class="create-form feedback-form" novalidate>
+        <div class="form-group">
+            <label for="name">Ваше имя <span aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" required minlength="2" maxlength="50"
+                placeholder="Иван Иванов" autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email <span aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" required
+                placeholder="example@mail.ru" autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Тема</label>
+            <select id="subject" name="subject">
+                <option value="general">Общий вопрос</option>
+                <option value="content">Историческое содержание</option>
+                <option value="technical">Технические проблемы</option>
+                <option value="suggestion">Предложение по улучшению</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Сообщение <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" required rows="5" minlength="10"
+                placeholder="Напишите ваше сообщение здесь..."></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Отправить</button>
+            <a href="/" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</section>
+{{/layout}}

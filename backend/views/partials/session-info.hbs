@@ -1,0 +1,7 @@
+{{#if user}}
+<span class="session-authorized">Вы вошли как <strong>{{user.name}}</strong></span>
+<a href="/?auth=0" class="session-link session-logout">Выйти</a>
+{{else}}
+<a href="/?auth=1" class="session-link session-login">Войти</a>
+<a href="/?auth=1" class="session-link session-register">Зарегистрироваться</a>
+{{/if}}

@@ -1,0 +1,31 @@
+{{#> layout}}
+<section aria-labelledby="feedback-list-title">
+    <div class="section-header">
+        <h1 id="feedback-list-title">Сообщения от пользователей</h1>
+        <a href="/feedback" class="btn btn-primary">+ Оставить отзыв</a>
+    </div>
+
+    {{#if items.length}}
+    <div class="objects-grid">
+        {{#each items}}
+        <article>
+            <header>
+                <h3>{{name}}</h3>
+                <p><small><a href="mailto:{{email}}">{{email}}</a></small></p>
+                <p><time>{{createdAt}}</time></p>
+            </header>
+            <p>{{message}}</p>
+            <div class="card-actions">
+                <form method="POST" action="/feedback/{{id}}/delete" style="display:inline">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Удалить сообщение?')">Удалить</button>
+                </form>
+            </div>
+        </article>
+        {{/each}}
+    </div>
+    {{else}}
+    <p class="empty-state">Сообщений пока нет.</p>
+    {{/if}}
+</section>
+{{/layout}}

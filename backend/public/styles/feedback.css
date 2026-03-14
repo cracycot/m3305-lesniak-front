@@ -1,0 +1,485 @@
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@400;700&display=swap');
+
+.feedback-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.feedback-form-wrapper {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #e0e0e0;
+  width: 100%;
+}
+
+.feedback-form-wrapper h2 {
+  color: #0D74BD;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #0D74BD;
+  padding-bottom: 0.5rem;
+  display: block;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.required {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: 'Geologica', sans-serif;
+  font-size: 1rem;
+  transition: all 0.25s ease;
+  width: 100%;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #0D74BD;
+  box-shadow: 0 0 0 3px rgba(13, 116, 189, 0.1);
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group select:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+  border-color: #d32f2f;
+}
+
+.form-group input:valid:not(:placeholder-shown),
+.form-group select:valid:not(:placeholder-shown),
+.form-group textarea:valid:not(:placeholder-shown) {
+  border-color: #4caf50;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.field-hint {
+  font-size: 0.875rem;
+  color: #757575;
+  font-style: italic;
+}
+
+.character-count {
+  text-align: right;
+  font-style: normal;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: none;
+  padding: 0.25rem 0.5rem;
+  background: #ffebee;
+  border-radius: 4px;
+}
+
+.error-message.show {
+  display: block;
+}
+
+.rating-input {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0.25rem;
+  justify-content: flex-end;
+}
+
+.rating-input input[type="radio"] {
+  display: none;
+}
+
+.rating-input label {
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: transform 0.15s ease;
+  margin: 0;
+  padding: 0.25rem;
+}
+
+.rating-input label:hover,
+.rating-input input[type="radio"]:checked ~ label {
+  transform: scale(1.1);
+}
+
+.rating-input input[type="radio"]:checked ~ label {
+  filter: brightness(1.2);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: normal !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.checkbox-label span {
+  line-height: 1.5;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Geologica', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0D74BD 0%, #0a5ea0 100%);
+  color: white;
+  flex: 1;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 116, 189, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: #f5f5f5;
+  color: #333;
+  flex: 1;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+.btn-danger {
+  background: #d32f2f;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #b71c1c;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.feedback-list-wrapper {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid #e0e0e0;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.feedback-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.feedback-list-header h2 {
+  margin: 0;
+  color: #0D74BD;
+  font-size: 1.5rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.feedback-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.no-feedback {
+  text-align: center;
+  color: #757575;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.feedback-item {
+  background: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #0D74BD;
+  transition: all 0.25s ease;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.feedback-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.feedback-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.feedback-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.author-name {
+  font-size: 1.125rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.feedback-rating {
+  font-size: 0.875rem;
+}
+
+.feedback-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #757575;
+}
+
+.feedback-category {
+  background: #0D74BD;
+  color: white;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.feedback-item-body {
+  margin-bottom: 1rem;
+}
+
+.feedback-message {
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.feedback-item-footer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: 1px solid #e0e0e0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Geologica', sans-serif;
+}
+
+.btn-edit:hover {
+  background: #0D74BD;
+  color: white;
+  border-color: #0D74BD;
+}
+
+.btn-delete:hover {
+  background: #d32f2f;
+  color: white;
+  border-color: #d32f2f;
+}
+
+.feedback-item.editing {
+  border-left-color: #ff9800;
+  background: #fff3e0;
+}
+
+.feedback-item.editing .feedback-message {
+  display: none;
+}
+
+.feedback-item.editing textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ff9800;
+  border-radius: 8px;
+  font-family: 'Geologica', sans-serif;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .feedback-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .feedback-list-wrapper {
+    max-height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feedback-form-wrapper,
+  .feedback-list-wrapper {
+    padding: 1.5rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .feedback-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .feedback-stats {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .feedback-item-header {
+    flex-direction: column;
+  }
+  
+  .feedback-meta {
+    align-items: flex-start;
+  }
+  
+  .feedback-item-footer {
+    flex-direction: column;
+  }
+  
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+  }
+}
+
+.feedback-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.feedback-list::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.feedback-list::-webkit-scrollbar-thumb {
+  background: #0D74BD;
+  border-radius: 4px;
+}
+
+.feedback-list::-webkit-scrollbar-thumb:hover {
+  background: #0a5ea0;
+}

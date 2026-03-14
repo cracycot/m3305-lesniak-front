@@ -1,0 +1,32 @@
+{{#> layout}}
+<section aria-labelledby="categories-title">
+    <div class="section-header">
+        <h1 id="categories-title">Категории объектов</h1>
+        <a href="/categories/new" class="btn btn-primary">+ Добавить категорию</a>
+    </div>
+
+    {{#if categories.length}}
+    <div class="objects-grid">
+        {{#each categories}}
+        <article>
+            <header>
+                <h3>{{name}}</h3>
+            </header>
+            {{#if description}}
+            <p>{{description}}</p>
+            {{/if}}
+            <div class="card-actions">
+                <a href="/categories/{{id}}/edit" class="btn btn-secondary">Редактировать</a>
+                <form method="POST" action="/categories/{{id}}/delete" style="display:inline">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Удалить категорию «{{name}}»?')">Удалить</button>
+                </form>
+            </div>
+        </article>
+        {{/each}}
+    </div>
+    {{else}}
+    <p class="empty-state">Категорий пока нет. <a href="/categories/new">Добавьте первую!</a></p>
+    {{/if}}
+</section>
+{{/layout}}

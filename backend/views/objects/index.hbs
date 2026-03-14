@@ -1,0 +1,88 @@
+{{#> layout}}
+<section aria-labelledby="objects-title">
+    <div class="section-header">
+        <h1 id="objects-title">Исторические объекты</h1>
+        <a href="/objects/new" class="btn btn-primary">+ Добавить объект</a>
+    </div>
+    <p>Коллекция значимых мест Ленинграда с историей их восстановления после войны.</p>
+
+    <div id="objects-sse-notifications"></div>
+
+    {{#if objects.length}}
+    <div class="objects-grid">
+        {{#each objects}}
+        <article aria-labelledby="obj{{id}}-title">
+            <header>
+                <h3 id="obj{{id}}-title">
+                    <a href="/objects/{{id}}">{{title}}</a>
+                </h3>
+                <p><time datetime="{{year}}">{{year}}</time> — год основания.</p>
+                {{#if category}}
+                <p class="badge">{{category.name}}</p>
+                {{/if}}
+            </header>
+            {{#if imageUrl}}
+            <figure>
+                <img src="{{imageUrl}}" alt="{{imageAlt}}" loading="lazy" />
+                {{#if imageCaption}}
+                <figcaption>{{imageCaption}}</figcaption>
+                {{/if}}
+            </figure>
+            {{/if}}
+            <p>{{description}}</p>
+            <div class="card-actions">
+                <a href="/objects/{{id}}" class="btn btn-secondary">Подробнее</a>
+                <a href="/objects/{{id}}/edit" class="btn btn-secondary">Редактировать</a>
+                <form method="POST" action="/objects/{{id}}/delete" style="display:inline">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Удалить объект «{{title}}»?')">Удалить</button>
+                </form>
+            </div>
+        </article>
+        {{/each}}
+    </div>
+    {{else}}
+    <p class="empty-state">Объектов пока нет. <a href="/objects/new">Добавьте первый!</a></p>
+    {{/if}}
+
+    <article>
+        <h2>Статистика восстановления</h2>
+        <table class="stats-table">
+            <thead>
+                <tr>
+                    <th>Объект</th>
+                    <th>Повреждения</th>
+                    <th>Начало восстановления</th>
+                    <th>Завершение</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Эрмитаж</td>
+                    <td>Средние</td>
+                    <td><time datetime="1945">1945</time></td>
+                    <td><time datetime="1950">1950</time></td>
+                </tr>
+                <tr>
+                    <td>Петергоф</td>
+                    <td>Критические</td>
+                    <td><time datetime="1944">1944</time></td>
+                    <td><time datetime="2003">2003</time></td>
+                </tr>
+                <tr>
+                    <td>Царское Село</td>
+                    <td>Критические</td>
+                    <td><time datetime="1945">1945</time></td>
+                    <td>Продолжается</td>
+                </tr>
+                <tr>
+                    <td>Исаакиевский собор</td>
+                    <td>Минимальные</td>
+                    <td><time datetime="1945">1945</time></td>
+                    <td><time datetime="1948">1948</time></td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+</section>
+{{/layout}}

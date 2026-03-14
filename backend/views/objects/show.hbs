@@ -1,0 +1,64 @@
+{{#> layout}}
+{{#if object}}
+<article aria-labelledby="object-title">
+    <header class="object-show-header">
+        <div>
+            <h1 id="object-title">{{object.title}}</h1>
+            <p><time datetime="{{object.year}}">{{object.year}}</time> — год основания.</p>
+            {{#if object.category}}
+            <p class="badge">{{object.category.name}}</p>
+            {{/if}}
+        </div>
+        <div class="card-actions">
+            <a href="/objects/{{object.id}}/edit" class="btn btn-secondary">Редактировать</a>
+            <form method="POST" action="/objects/{{object.id}}/delete" style="display:inline">
+                <button type="submit" class="btn btn-danger"
+                    onclick="return confirm('Удалить объект «{{object.title}}»?')">Удалить</button>
+            </form>
+        </div>
+    </header>
+
+    {{#if object.imageUrl}}
+    <figure>
+        <img src="{{object.imageUrl}}" alt="{{object.imageAlt}}" />
+        {{#if object.imageCaption}}
+        <figcaption>{{object.imageCaption}}</figcaption>
+        {{/if}}
+    </figure>
+    {{/if}}
+
+    {{#if object.description}}
+    <p>{{object.description}}</p>
+    {{/if}}
+
+    {{#if object.facts.length}}
+    <aside>
+        <h2>Интересные факты</h2>
+        <ul>
+            {{#each object.facts}}
+            <li>{{text}}</li>
+            {{/each}}
+        </ul>
+    </aside>
+    {{/if}}
+
+    {{#if object.periods.length}}
+    <aside>
+        <h2>Периоды</h2>
+        <ul>
+            {{#each object.periods}}
+            <li>{{name}}{{#if startYear}} ({{startYear}}{{#if endYear}}–{{endYear}}{{/if}}){{/if}}</li>
+            {{/each}}
+        </ul>
+    </aside>
+    {{/if}}
+
+    <p><a href="/objects" class="btn btn-secondary">&larr; Все объекты</a></p>
+</article>
+{{else}}
+<section>
+    <h1>Объект не найден</h1>
+    <p><a href="/objects" class="btn btn-secondary">&larr; Все объекты</a></p>
+</section>
+{{/if}}
+{{/layout}}

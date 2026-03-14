@@ -1,0 +1,66 @@
+{{#> layout}}
+<section aria-labelledby="edit-title">
+    <h1 id="edit-title">Редактировать объект</h1>
+
+    {{#if object}}
+    <form method="POST" action="/objects/{{object.id}}" class="create-form">
+        <div class="form-group">
+            <label for="title">Название объекта <span aria-hidden="true">*</span></label>
+            <input type="text" id="title" name="title" required value="{{object.title}}" />
+        </div>
+
+        <div class="form-group">
+            <label for="year">Год основания <span aria-hidden="true">*</span></label>
+            <input type="number" id="year" name="year" required min="1000" max="2100"
+                value="{{object.year}}" />
+        </div>
+
+        {{#if categories.length}}
+        <div class="form-group">
+            <label for="categoryId">Категория</label>
+            <select id="categoryId" name="categoryId">
+                <option value="">— без категории —</option>
+                {{#each categories}}
+                <option value="{{id}}" {{#if (eq id ../object.category.id)}}selected{{/if}}>{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        {{/if}}
+
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea id="description" name="description" rows="5">{{object.description}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="imageUrl">URL изображения</label>
+            <input type="url" id="imageUrl" name="imageUrl" value="{{object.imageUrl}}" />
+        </div>
+
+        <div class="form-group">
+            <label for="imageAlt">Alt-текст изображения</label>
+            <input type="text" id="imageAlt" name="imageAlt" value="{{object.imageAlt}}" />
+        </div>
+
+        <div class="form-group">
+            <label for="imageCaption">Подпись к изображению</label>
+            <input type="text" id="imageCaption" name="imageCaption" value="{{object.imageCaption}}" />
+        </div>
+
+        <div class="form-group">
+            <label for="facts">Интересные факты</label>
+            <textarea id="facts" name="facts" rows="4">{{#each object.facts}}{{text}}
+{{/each}}</textarea>
+            <small>Каждый факт — с новой строки</small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            <a href="/objects/{{object.id}}" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+    {{else}}
+    <p>Объект не найден.</p>
+    {{/if}}
+</section>
+{{/layout}}

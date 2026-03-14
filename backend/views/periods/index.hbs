@@ -1,0 +1,39 @@
+{{#> layout}}
+<section aria-labelledby="periods-title">
+    <div class="section-header">
+        <h1 id="periods-title">Исторические периоды</h1>
+        <a href="/periods/new" class="btn btn-primary">+ Добавить период</a>
+    </div>
+    <p>Хронология ключевых эпох в истории Ленинграда.</p>
+
+    {{#if periods.length}}
+    <div class="objects-grid">
+        {{#each periods}}
+        <article>
+            <header>
+                <h3>{{name}}</h3>
+                {{#if startYear}}
+                <p>
+                    <time datetime="{{startYear}}">{{startYear}}</time>
+                    {{#if endYear}}–<time datetime="{{endYear}}">{{endYear}}</time>{{/if}}
+                </p>
+                {{/if}}
+            </header>
+            {{#if description}}
+            <p>{{description}}</p>
+            {{/if}}
+            <div class="card-actions">
+                <a href="/periods/{{id}}/edit" class="btn btn-secondary">Редактировать</a>
+                <form method="POST" action="/periods/{{id}}/delete" style="display:inline">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Удалить период «{{name}}»?')">Удалить</button>
+                </form>
+            </div>
+        </article>
+        {{/each}}
+    </div>
+    {{else}}
+    <p class="empty-state">Периодов пока нет. <a href="/periods/new">Добавьте первый!</a></p>
+    {{/if}}
+</section>
+{{/layout}}

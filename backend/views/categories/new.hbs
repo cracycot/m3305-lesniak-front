@@ -1,0 +1,23 @@
+{{#> layout}}
+<section aria-labelledby="create-category-title">
+    <h1 id="create-category-title">Добавить категорию</h1>
+
+    <form method="POST" action="/categories" class="create-form">
+        <div class="form-group">
+            <label for="name">Название <span aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="Например: Музей" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea id="description" name="description" rows="3"
+                placeholder="Краткое описание категории"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Создать категорию</button>
+            <a href="/categories" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</section>
+{{/layout}}

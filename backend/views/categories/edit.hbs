@@ -1,0 +1,26 @@
+{{#> layout}}
+<section aria-labelledby="edit-category-title">
+    <h1 id="edit-category-title">Редактировать категорию</h1>
+
+    {{#if category}}
+    <form method="POST" action="/categories/{{category.id}}" class="create-form">
+        <div class="form-group">
+            <label for="name">Название <span aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" required value="{{category.name}}" />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea id="description" name="description" rows="3">{{category.description}}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="/categories" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+    {{else}}
+    <p>Категория не найдена.</p>
+    {{/if}}
+</section>
+{{/layout}}
