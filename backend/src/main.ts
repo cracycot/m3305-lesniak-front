@@ -25,6 +25,6 @@ async function bootstrap() {
     hbs.registerHelper('eq', (a: unknown, b: unknown) => a === b);
 
     const port = process.env.PORT ?? 3080;
-    await app.listen(port);
+    await app.listen(port, '0.0.0.0');
 }
 bootstrap();
