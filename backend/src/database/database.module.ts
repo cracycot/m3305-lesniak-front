@@ -12,6 +12,7 @@ import { parse } from 'pg-connection-string';
                 const url = config.get<string>('DATABASE_URL') ?? '';
                 const conn = parse(url);
                 const isProduction = config.get('NODE_ENV') === 'production';
+                const sslDisabled = url.includes('sslmode=disable');
                 return {
                     type: 'postgres',
                     host: conn.host ?? 'localhost',
@@ -19,7 +20,7 @@ import { parse } from 'pg-connection-string';
                     username: conn.user ?? 'postgres',
                     password: conn.password ?? '',
                     database: (conn.database as string) ?? 'leningrad',
-                    ssl: isProduction ? { rejectUnauthorized: false } : false,
+                    ssl: sslDisabled ? false : isProduction ? { rejectUnauthorized: false } : false,
                     autoLoadEntities: true,
                     synchronize: !isProduction,
                 };
