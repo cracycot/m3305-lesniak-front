@@ -15,6 +15,26 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
+
+  # SuperTokens Core — сервер аутентификации (ЛР7)
+  # Доступен внутри Docker-сети на supertokens:3567
+  # Swagger UI: http://localhost:3080/api-docs
+  supertokens:
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:latest
+    environment:
+      POSTGRESQL_CONNECTION_URI: postgresql://postgres:leningrad_secret@db:5432/leningrad
+    ports:
+      - "3567:3567"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3567/hello"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
 
   app:
     build:
@@ -25,10 +45,20 @@ services:
       - "0.0.0.0:3080:3080"
     environment:
       PORT: "3080"
+      # В контейнере Dockerfile выставляет NODE_ENV=production, из-за этого TypeORM выключает synchronize.
+      # Для лабораторных локально включаем автосоздание таблиц.
+      TYPEORM_SYNCHRONIZE: "1"
       DATABASE_SSL_DISABLE: "1"
       DATABASE_URL: postgresql://postgres:leningrad_secret@db:5432/leningrad?sslmode=disable
+      # SuperTokens (ЛР7) — подключается к локальному core-контейнеру
+      SUPERTOKENS_CONNECTION_URI: http://supertokens:3567
+      SUPERTOKENS_APP_NAME: "Leningrad After Victory"
+      SUPERTOKENS_API_DOMAIN: http://localhost:3080
+      SUPERTOKENS_WEBSITE_DOMAIN: http://localhost:3080
     depends_on:
       db:
+        condition: service_healthy
+      supertokens:
         condition: service_healthy
     restart: unless-stopped
 
