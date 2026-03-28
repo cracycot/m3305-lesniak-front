@@ -26,7 +26,18 @@ export class AuthGuard implements CanActivate {
         if (isPublic) return true;
 
         const request = context.switchToHttp().getRequest<Request & { user?: AuthenticatedUser }>();
-        const user = await this.authService.verifySession(request);
+
+        // 1. Попробовать SuperTokens сессию (cookies)
+        let user = await this.authService.verifySession(request);
+
+        // 2. Fallback: Bearer token в заголовке Authorization
+        if (!user) {
+            const authHeader = request.headers['authorization'];
+            if (authHeader?.startsWith('Bearer ')) {
+                const token = authHeader.slice(7);
+                user = await this.authService.verifyAccessToken(token);
+            }
+        }
 
         if (!user) {
             throw new UnauthorizedException('Authentication required');

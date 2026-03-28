@@ -83,4 +83,26 @@ export class AuthService {
             return null;
         }
     }
+
+    /**
+     * Проверяет access token напрямую (для Bearer-авторизации в Swagger/curl).
+     */
+    async verifyAccessToken(token: string): Promise<AuthenticatedUser | null> {
+        if (!this.initialized) return null;
+
+        try {
+            const payload = await Session.getSessionWithoutRequestResponse(token);
+            const userId = payload.getUserId();
+
+            const rolesResponse = await UserRoles.getRolesForUser('public', userId);
+            const roles = rolesResponse.status === 'OK' ? rolesResponse.roles : [];
+
+            const userInfo = await supertokens.getUser(userId);
+            const email = userInfo?.emails?.[0] ?? '';
+
+            return { id: userId, email, roles };
+        } catch {
+            return null;
+        }
+    }
 }

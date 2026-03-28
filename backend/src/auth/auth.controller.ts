@@ -80,13 +80,18 @@ export class AuthController {
 
             const supertokensNode = await import('supertokens-node');
             const Session = await import('supertokens-node/recipe/session');
-            await Session.default.createNewSession(
+            const session = await Session.default.createNewSession(
                 req, res, 'public',
                 new supertokensNode.default.RecipeUserId(signInResult.user.id),
             );
 
             if (req.headers['content-type']?.includes('application/json')) {
-                res.status(200).json({ message: 'OK', userId: signInResult.user.id });
+                const tokens = session.getAllSessionTokensDangerously();
+                res.status(200).json({
+                    message: 'OK',
+                    userId: signInResult.user.id,
+                    accessToken: tokens.accessToken,
+                });
             } else {
                 res.redirect('/');
             }
