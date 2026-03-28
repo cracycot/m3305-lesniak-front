@@ -53,10 +53,11 @@ export class AuthController {
 
     @Post('login')
     @PublicAccess()
-    @ApiOperation({ summary: 'Войти в систему (email + password)' })
+    @ApiOperation({ summary: 'Войти в систему (email + password)', description: 'Возвращает accessToken (JWT) для авторизации API-запросов через заголовок Authorization: Bearer <token>' })
     @ApiBody({ type: LoginDto })
-    @ApiResponse({ status: 200, description: 'Успешный вход, сессия установлена' })
-    @ApiResponse({ status: 401, description: 'Неверные учётные данные' })
+    @ApiResponse({ status: 200, description: 'Успешный вход. В ответе содержится accessToken для Bearer-авторизации' })
+    @ApiResponse({ status: 401, description: 'Неверный email или пароль' })
+    @ApiResponse({ status: 503, description: 'Сервис аутентификации (SuperTokens) недоступен' })
     async login(
         @Body() dto: LoginDto,
         @Req() req: Request,
@@ -106,10 +107,12 @@ export class AuthController {
 
     @Post('register')
     @PublicAccess()
-    @ApiOperation({ summary: 'Зарегистрировать нового пользователя' })
+    @ApiOperation({ summary: 'Зарегистрировать нового пользователя', description: 'Создаёт пользователя в SuperTokens и возвращает accessToken' })
     @ApiBody({ type: RegisterDto })
-    @ApiResponse({ status: 201, description: 'Пользователь создан' })
+    @ApiResponse({ status: 201, description: 'Пользователь создан, сессия установлена' })
+    @ApiResponse({ status: 400, description: 'Некорректные данные (невалидный email или короткий пароль)' })
     @ApiResponse({ status: 409, description: 'Пользователь с таким email уже существует' })
+    @ApiResponse({ status: 503, description: 'Сервис аутентификации (SuperTokens) недоступен' })
     async register(
         @Body() dto: RegisterDto,
         @Req() req: Request,
@@ -162,8 +165,9 @@ export class AuthController {
 
     @Post('logout')
     @PublicAccess()
-    @ApiOperation({ summary: 'Выйти из системы (завершить сессию)' })
+    @ApiOperation({ summary: 'Выйти из системы (завершить сессию)', description: 'Отзывает текущую сессию SuperTokens. Безопасен при вызове без активной сессии' })
     @ApiResponse({ status: 200, description: 'Сессия завершена' })
+    @ApiResponse({ status: 503, description: 'Сервис аутентификации недоступен (сессия всё равно считается завершённой)' })
     async logout(
         @Req() req: Request,
         @Res() res: Response,

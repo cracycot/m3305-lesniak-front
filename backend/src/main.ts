@@ -53,11 +53,30 @@ async function bootstrap() {
     );
 
     const swaggerConfig = new DocumentBuilder()
-        .setTitle('Ленинград после Победы API')
-        .setDescription('RESTful API для исторических объектов послевоенного Ленинграда')
+        .setTitle('Ленинград после Победы — API')
+        .setDescription(
+            'RESTful API историко-образовательного проекта о послевоенном Ленинграде.\n\n' +
+            '### Аутентификация\n' +
+            '1. Вызовите `POST /auth/login` с email и паролем\n' +
+            '2. Скопируйте `accessToken` из ответа\n' +
+            '3. Нажмите кнопку **Authorize** и вставьте токен\n\n' +
+            '### Ресурсы\n' +
+            '- **GraphQL Sandbox:** [/graphql](/graphql)\n' +
+            '- **Главная страница:** [/](/)\n',
+        )
         .setVersion('1.0')
+        .addTag('auth', 'Аутентификация и управление сессиями (SuperTokens)')
+        .addTag('objects', 'Исторические объекты Ленинграда (CRUD, вложенные факты и периоды)')
+        .addTag('categories', 'Категории объектов (музеи, соборы, памятники и т.д.)')
+        .addTag('periods', 'Исторические периоды (довоенный, блокада, восстановление)')
+        .addTag('feedback', 'Обратная связь от пользователей')
         .addBearerAuth(
-            { type: 'http', scheme: 'bearer', bearerFormat: 'JWT', description: 'SuperTokens Access Token' },
+            {
+                type: 'http',
+                scheme: 'bearer',
+                bearerFormat: 'JWT',
+                description: 'SuperTokens Access Token. Получите через POST /auth/login → поле accessToken',
+            },
             'supertokens',
         )
         .addCookieAuth('sAccessToken', { type: 'apiKey', in: 'cookie', name: 'sAccessToken' }, 'cookie-auth')

@@ -1,3 +1,4 @@
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -18,12 +19,8 @@ const MAX_COMPLEXITY = 200;
     imports: [
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
-            // В Docker контейнер запускается под non-root, поэтому не пишем schema на диск.
-            // Schema генерируется в памяти и доступна через introspection.
             autoSchemaFile: true,
             sortSchema: true,
-            // Для локальной песочницы/лабораторной отключаем CSRF-prevention Apollo Server,
-            // иначе запросы без корректного JSON content-type могут блокироваться.
             csrfPrevention: false,
             playground: false,
             introspection: true,
@@ -36,6 +33,7 @@ const MAX_COMPLEXITY = 200;
                 dateScalarMode: 'timestamp',
             },
             plugins: [
+                ApolloServerPluginLandingPageLocalDefault({ embed: true, footer: false }),
                 {
                     async requestDidStart(requestContext) {
                         const schema = requestContext.schema;
