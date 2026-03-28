@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Period } from './entities/period.entity';
@@ -15,8 +15,25 @@ export class PeriodsService {
         return this.repo.find({ order: { startYear: 'ASC' } });
     }
 
+    async findAndCount(page: number, limit: number): Promise<[Period[], number]> {
+        const [items, total] = await this.repo.findAndCount({
+            order: { startYear: 'ASC' },
+            skip: (page - 1) * limit,
+            take: limit,
+        });
+        return [items, total];
+    }
+
     findOne(id: number): Promise<Period | null> {
         return this.repo.findOneBy({ id });
+    }
+
+    async findOneOrFail(id: number): Promise<Period> {
+        const period = await this.findOne(id);
+        if (!period) {
+            throw new NotFoundException('Period not found');
+        }
+        return period;
     }
 
     create(dto: CreatePeriodDto): Promise<Period> {

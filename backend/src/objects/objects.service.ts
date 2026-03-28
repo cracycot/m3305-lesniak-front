@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Subject } from 'rxjs';
@@ -29,11 +29,29 @@ export class ObjectsService {
         });
     }
 
+    async findAndCount(page: number, limit: number): Promise<[HistoricalObject[], number]> {
+        const [items, total] = await this.objectsRepo.findAndCount({
+            relations: ['category', 'facts'],
+            order: { createdAt: 'DESC' },
+            skip: (page - 1) * limit,
+            take: limit,
+        });
+        return [items, total];
+    }
+
     findOne(id: number): Promise<HistoricalObject | null> {
         return this.objectsRepo.findOne({
             where: { id },
             relations: ['category', 'facts', 'periods'],
         });
+    }
+
+    async findOneOrFail(id: number): Promise<HistoricalObject> {
+        const obj = await this.findOne(id);
+        if (!obj) {
+            throw new NotFoundException('Object not found');
+        }
+        return obj;
     }
 
     async create(dto: CreateObjectDto): Promise<HistoricalObject> {

@@ -1,7 +1,11 @@
 {{#if user}}
-<span class="session-authorized">Вы вошли как <strong>{{user.name}}</strong></span>
-<a href="/?auth=0" class="session-link session-logout">Выйти</a>
+<span class="session-authorized">Вы вошли как <strong>{{user.email}}</strong>
+{{#if user.isAdmin}}<span class="badge badge-admin">admin</span>{{/if}}
+</span>
+<form method="POST" action="/auth/logout" style="display:inline">
+    <button type="submit" class="session-link session-logout">Выйти</button>
+</form>
 {{else}}
-<a href="/?auth=1" class="session-link session-login">Войти</a>
-<a href="/?auth=1" class="session-link session-register">Зарегистрироваться</a>
+<a href="/auth/login" class="session-link session-login">Войти</a>
+<a href="/auth/register" class="session-link session-register">Зарегистрироваться</a>
 {{/if}}

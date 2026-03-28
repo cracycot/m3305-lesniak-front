@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { parse } from 'pg-connection-string';
+import { join } from 'path';
 
 @Module({
     imports: [
@@ -12,6 +13,9 @@ import { parse } from 'pg-connection-string';
                 const url = config.get<string>('DATABASE_URL') ?? '';
                 const conn = parse(url);
                 const isProduction = config.get('NODE_ENV') === 'production';
+                const forceSynchronize =
+                    config.get<string>('TYPEORM_SYNCHRONIZE') === '1' ||
+                    config.get<string>('DB_SYNCHRONIZE') === '1';
                 const sslDisabled =
                     config.get<string>('DATABASE_SSL_DISABLE') === '1' ||
                     url.includes('sslmode=disable');
@@ -24,7 +28,11 @@ import { parse } from 'pg-connection-string';
                     database: (conn.database as string) ?? 'leningrad',
                     ssl: sslDisabled ? false : isProduction ? { rejectUnauthorized: false } : false,
                     autoLoadEntities: true,
-                    synchronize: !isProduction,
+                    synchronize: forceSynchronize ? true : !isProduction,
+                    migrations: [join(__dirname, 'migrations', '*{.ts,.js}')],
+                    migrationsRun: isProduction,
+                    logging: isProduction ? ['error'] : ['error', 'warn', 'schema', 'migration'],
+                    logger: 'advanced-console',
                 };
             },
         }),
