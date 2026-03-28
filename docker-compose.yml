@@ -1,3 +1,5 @@
+version: "2.4"
+
 # Пароль БД: при первом запуске или после "docker-compose down -v" совпадает с DATABASE_URL в app
 services:
   db:
