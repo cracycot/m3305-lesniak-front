@@ -13,10 +13,8 @@ import { EntityNotFoundError, QueryFailedError, TypeORMError } from 'typeorm';
 export class AllExceptionsFilter implements ExceptionFilter {
     private readonly logger = new Logger(AllExceptionsFilter.name);
 
-    catch(exception: unknown, host: ArgumentsHost): void {
-        const ctx = host.switchToHttp();
-        const response = ctx.getResponse<Response>();
-        const request = ctx.getRequest<Request>();
+    catch(exception: unknown, host: ArgumentsHost): void | unknown {
+        const contextType = host.getType<'http' | 'graphql'>();
 
         let status = HttpStatus.INTERNAL_SERVER_ERROR;
         let message = 'Internal server error';
@@ -62,8 +60,23 @@ export class AllExceptionsFilter implements ExceptionFilter {
             message = 'Service unavailable';
         }
 
+        // GraphQL-контекст: нет HTTP-response, нужно пробросить ошибку как GraphQLError,
+        // чтобы Apollo Server сам сформатировал её в { errors: [...] }.
+        if (contextType === 'graphql') {
+            this.logger.error(
+                `[GraphQL] ${status}: ${message}`,
+                exception instanceof Error ? exception.stack : String(exception),
+            );
+            if (exception instanceof HttpException) return exception;
+            return new HttpException(message, status);
+        }
+
+        const ctx = host.switchToHttp();
+        const response = ctx.getResponse<Response>();
+        const request = ctx.getRequest<Request>();
+
         this.logger.error(
-            `${request.method} ${request.url} → ${status}: ${message}`,
+            `${request?.method ?? '?'} ${request?.url ?? '?'} → ${status}: ${message}`,
             exception instanceof Error ? exception.stack : String(exception),
         );
 
@@ -72,15 +85,15 @@ export class AllExceptionsFilter implements ExceptionFilter {
             return;
         }
 
-        const isApiOrGraphql =
-            request.url.startsWith('/api/') || request.url.startsWith('/graphql');
+        const url = request?.url ?? '';
+        const isApiOrGraphql = url.startsWith('/api/') || url.startsWith('/graphql');
 
         if (isApiOrGraphql) {
             response.status(status).json({
                 statusCode: status,
                 message,
                 timestamp: new Date().toISOString(),
-                path: request.url,
+                path: url,
             });
         } else {
             try {
@@ -94,7 +107,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
                     statusCode: status,
                     message,
                     timestamp: new Date().toISOString(),
-                    path: request.url,
+                    path: url,
                 });
             }
         }
