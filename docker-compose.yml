@@ -1,6 +1,10 @@
 version: "2.4"
 
-# Пароль БД: при первом запуске или после "docker-compose down -v" совпадает с DATABASE_URL в app
+# Нестандартные внешние порты, чтобы не конфликтовать с соседними проектами:
+#   - PostgreSQL: 54325 (стандартный 5432, уже смещён)
+#   - SuperTokens: 35675 (стандартный 3567)
+#   - App:        38085 (стандартный 3000/3080)
+# Внутри Docker-сети контейнеры общаются по стандартным портам.
 services:
   db:
     image: postgres:16-alpine
@@ -11,7 +15,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "54320:5432"
+      - "54325:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -20,14 +24,14 @@ services:
     restart: unless-stopped
 
   # SuperTokens Core — сервер аутентификации (ЛР7)
-  # Доступен внутри Docker-сети на supertokens:3567
-  # Swagger UI: http://localhost:3080/api-docs
+  # Внутри Docker-сети: supertokens:3567
+  # Снаружи: http://<host>:35675
   supertokens:
     image: registry.supertokens.io/supertokens/supertokens-postgresql:latest
     environment:
       POSTGRESQL_CONNECTION_URI: postgresql://postgres:leningrad_secret@db:5432/leningrad
     ports:
-      - "3567:3567"
+      - "35675:3567"
     depends_on:
       db:
         condition: service_healthy
@@ -44,7 +48,7 @@ services:
       dockerfile: Dockerfile
     image: leningrad-backend
     ports:
-      - "0.0.0.0:3080:3080"
+      - "0.0.0.0:38085:3080"
     environment:
       PORT: "3080"
       # В контейнере Dockerfile выставляет NODE_ENV=production, из-за этого TypeORM выключает synchronize.
@@ -55,8 +59,8 @@ services:
       # SuperTokens (ЛР7) — подключается к локальному core-контейнеру
       SUPERTOKENS_CONNECTION_URI: http://supertokens:3567
       SUPERTOKENS_APP_NAME: "Leningrad After Victory"
-      SUPERTOKENS_API_DOMAIN: http://localhost:3080
-      SUPERTOKENS_WEBSITE_DOMAIN: http://localhost:3080
+      SUPERTOKENS_API_DOMAIN: http://localhost:38085
+      SUPERTOKENS_WEBSITE_DOMAIN: http://localhost:38085
       # Yandex Object Storage (ЛР6) — значения берутся из .env файла на хосте
       YC_ACCESS_KEY_ID: ${YC_ACCESS_KEY_ID:-}
       YC_SECRET_ACCESS_KEY: ${YC_SECRET_ACCESS_KEY:-}
