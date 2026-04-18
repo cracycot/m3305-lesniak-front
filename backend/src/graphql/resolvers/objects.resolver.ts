@@ -8,6 +8,7 @@ import { ObjectFactType } from '../types/object-fact.type';
 import { PeriodType } from '../types/period.type';
 import { CreateHistoricalObjectInput, UpdateHistoricalObjectInput } from '../inputs/historical-object.input';
 import { HistoricalObject } from '../../objects/entities/historical-object.entity';
+import { ObjectFact } from '../../objects/entities/object-fact.entity';
 
 @Resolver(() => HistoricalObjectType)
 export class ObjectsResolver {
@@ -58,6 +59,72 @@ export class ObjectsResolver {
     ): Promise<boolean> {
         await this.objectsService.remove(id);
         return true;
+    }
+
+    // ─── Доменные мутации (операции предметной области) ─────────────────
+
+    @Mutation(() => HistoricalObjectType, {
+        description: 'Привязать объект к историческому периоду (например, отметить, что Эрмитаж существовал в период блокады)',
+    })
+    async attachObjectToPeriod(
+        @Args('objectId', { type: () => Int, description: 'ID исторического объекта' }) objectId: number,
+        @Args('periodId', { type: () => Int, description: 'ID исторического периода' }) periodId: number,
+    ): Promise<HistoricalObjectType> {
+        const result = await this.objectsService.attachToPeriod(objectId, periodId);
+        return result as unknown as HistoricalObjectType;
+    }
+
+    @Mutation(() => HistoricalObjectType, {
+        description: 'Отвязать объект от исторического периода',
+    })
+    async detachObjectFromPeriod(
+        @Args('objectId', { type: () => Int, description: 'ID исторического объекта' }) objectId: number,
+        @Args('periodId', { type: () => Int, description: 'ID исторического периода' }) periodId: number,
+    ): Promise<HistoricalObjectType> {
+        const result = await this.objectsService.detachFromPeriod(objectId, periodId);
+        return result as unknown as HistoricalObjectType;
+    }
+
+    @Mutation(() => ObjectFactType, {
+        description: 'Добавить новый интересный факт об объекте',
+    })
+    async addFactToObject(
+        @Args('objectId', { type: () => Int, description: 'ID исторического объекта' }) objectId: number,
+        @Args('text', { description: 'Текст факта' }) text: string,
+    ): Promise<ObjectFactType> {
+        const fact = await this.objectsService.addFact(objectId, text);
+        return fact as unknown as ObjectFactType;
+    }
+
+    @Mutation(() => Boolean, {
+        description: 'Удалить факт об объекте по ID факта',
+    })
+    async removeFact(
+        @Args('factId', { type: () => Int, description: 'ID факта' }) factId: number,
+    ): Promise<boolean> {
+        await this.objectsService.removeFact(factId);
+        return true;
+    }
+
+    @Mutation(() => HistoricalObjectType, {
+        description: 'Назначить категорию объекту (например, отнести Эрмитаж к категории "Музеи")',
+    })
+    async assignObjectToCategory(
+        @Args('objectId', { type: () => Int, description: 'ID исторического объекта' }) objectId: number,
+        @Args('categoryId', { type: () => Int, description: 'ID категории' }) categoryId: number,
+    ): Promise<HistoricalObjectType> {
+        const result = await this.objectsService.assignCategory(objectId, categoryId);
+        return result as unknown as HistoricalObjectType;
+    }
+
+    @Mutation(() => HistoricalObjectType, {
+        description: 'Снять категорию с объекта (объект останется без категории)',
+    })
+    async unassignObjectCategory(
+        @Args('objectId', { type: () => Int, description: 'ID исторического объекта' }) objectId: number,
+    ): Promise<HistoricalObjectType> {
+        const result = await this.objectsService.unassignCategory(objectId);
+        return result as unknown as HistoricalObjectType;
     }
 
     @ResolveField(() => CategoryType, { nullable: true, description: 'Категория объекта' })

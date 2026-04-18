@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { HistoricalObject } from './entities/historical-object.entity';
 import { ObjectFact } from './entities/object-fact.entity';
 import { Category } from '../categories/entities/category.entity';
+import { Period } from '../periods/entities/period.entity';
 import { CreateObjectDto } from './dto/create-object.dto';
 import { UpdateObjectDto } from './dto/update-object.dto';
 
@@ -20,6 +21,8 @@ export class ObjectsService {
         private readonly factsRepo: Repository<ObjectFact>,
         @InjectRepository(Category)
         private readonly categoriesRepo: Repository<Category>,
+        @InjectRepository(Period)
+        private readonly periodsRepo: Repository<Period>,
     ) {}
 
     findAll(): Promise<HistoricalObject[]> {
@@ -116,5 +119,76 @@ export class ObjectsService {
 
     async remove(id: number): Promise<void> {
         await this.objectsRepo.delete(id);
+    }
+
+    // ─── Доменные операции ──────────────────────────────────────────────
+
+    async attachToPeriod(objectId: number, periodId: number): Promise<HistoricalObject> {
+        const obj = await this.objectsRepo.findOne({
+            where: { id: objectId },
+            relations: ['category', 'facts', 'periods'],
+        });
+        if (!obj) throw new NotFoundException('Object not found');
+
+        const period = await this.periodsRepo.findOneBy({ id: periodId });
+        if (!period) throw new NotFoundException('Period not found');
+
+        obj.periods = obj.periods ?? [];
+        if (!obj.periods.some((p) => p.id === period.id)) {
+            obj.periods.push(period);
+            await this.objectsRepo.save(obj);
+        }
+        return obj;
+    }
+
+    async detachFromPeriod(objectId: number, periodId: number): Promise<HistoricalObject> {
+        const obj = await this.objectsRepo.findOne({
+            where: { id: objectId },
+            relations: ['category', 'facts', 'periods'],
+        });
+        if (!obj) throw new NotFoundException('Object not found');
+
+        obj.periods = (obj.periods ?? []).filter((p) => p.id !== periodId);
+        await this.objectsRepo.save(obj);
+        return obj;
+    }
+
+    async addFact(objectId: number, text: string): Promise<ObjectFact> {
+        const obj = await this.objectsRepo.findOneBy({ id: objectId });
+        if (!obj) throw new NotFoundException('Object not found');
+
+        const fact = this.factsRepo.create({ text, object: obj });
+        return this.factsRepo.save(fact);
+    }
+
+    async removeFact(factId: number): Promise<void> {
+        const fact = await this.factsRepo.findOneBy({ id: factId });
+        if (!fact) throw new NotFoundException('Fact not found');
+        await this.factsRepo.delete(factId);
+    }
+
+    async assignCategory(objectId: number, categoryId: number): Promise<HistoricalObject> {
+        const obj = await this.objectsRepo.findOne({
+            where: { id: objectId },
+            relations: ['category', 'facts', 'periods'],
+        });
+        if (!obj) throw new NotFoundException('Object not found');
+
+        const category = await this.categoriesRepo.findOneBy({ id: categoryId });
+        if (!category) throw new NotFoundException('Category not found');
+
+        obj.category = category;
+        return this.objectsRepo.save(obj);
+    }
+
+    async unassignCategory(objectId: number): Promise<HistoricalObject> {
+        const obj = await this.objectsRepo.findOne({
+            where: { id: objectId },
+            relations: ['category', 'facts', 'periods'],
+        });
+        if (!obj) throw new NotFoundException('Object not found');
+
+        obj.category = null;
+        return this.objectsRepo.save(obj);
     }
 }
