@@ -33,6 +33,9 @@ const MAX_COMPLEXITY = 200;
                 dateScalarMode: 'timestamp',
             },
             plugins: [
+                // Apollo Sandbox — встроенная UI-песочница для GraphQL (аналог Swagger).
+                // Local-вариант работает и в dev, и в prod. Для альтернативного UI
+                // есть отдельная страница /graphiql (классический GraphiQL).
                 ApolloServerPluginLandingPageLocalDefault({ embed: true, footer: false }),
                 {
                     async requestDidStart(requestContext) {

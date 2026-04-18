@@ -61,7 +61,8 @@ async function bootstrap() {
             '2. Скопируйте `accessToken` из ответа\n' +
             '3. Нажмите кнопку **Authorize** и вставьте токен\n\n' +
             '### Ресурсы\n' +
-            '- **GraphQL Sandbox:** [/graphql](/graphql)\n' +
+            '- **GraphQL Sandbox (Apollo):** [/graphql](/graphql)\n' +
+            '- **GraphiQL (классический UI):** [/graphiql](/graphiql)\n' +
             '- **Главная страница:** [/](/)\n',
         )
         .setVersion('1.0')
