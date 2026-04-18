@@ -5,6 +5,7 @@ import {
     Get,
     Inject,
     Param,
+    ParseFilePipeBuilder,
     ParseIntPipe,
     Patch,
     Post,
@@ -13,7 +14,9 @@ import {
     HttpStatus,
     Res,
     Req,
+    UploadedFile,
     UseGuards,
+    UseInterceptors,
 } from '@nestjs/common';
 import {
     ApiTags,
@@ -21,10 +24,12 @@ import {
     ApiResponse,
     ApiQuery,
     ApiBody,
+    ApiConsumes,
     ApiParam,
     ApiHeader,
     ApiBearerAuth,
 } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Request, Response } from 'express';
 import { AuthGuard } from '../auth/auth.guard';
 import { PublicAccess } from '../auth/public.decorator';
@@ -34,6 +39,7 @@ import * as crypto from 'crypto';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { ObjectsService } from './objects.service';
+import { StorageService } from '../storage/storage.service';
 import { CreateObjectDto } from './dto/create-object.dto';
 import { UpdateObjectDto } from './dto/update-object.dto';
 import {
@@ -61,6 +67,7 @@ function buildLinkHeader(basePath: string, page: number, limit: number, total: n
 export class ObjectsApiController {
     constructor(
         private readonly objectsService: ObjectsService,
+        private readonly storageService: StorageService,
         @Inject(CACHE_MANAGER) private readonly cache: Cache,
     ) {}
 
@@ -179,5 +186,56 @@ export class ObjectsApiController {
     @ApiResponse({ status: 404, description: 'Объект не найден' })
     async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
         await this.objectsService.remove(id);
+    }
+
+    @Post(':id/image')
+    @Roles('admin')
+    @UseInterceptors(FileInterceptor('file'))
+    @ApiBearerAuth('supertokens')
+    @ApiOperation({
+        summary: 'Загрузить изображение объекта в Yandex Object Storage (admin)',
+        description:
+            'Принимает multipart/form-data с полем `file` (image/*, ≤ 5 MB). ' +
+            'Загружает файл в S3-совместимое хранилище и записывает URL в imageUrl объекта.',
+    })
+    @ApiParam({ name: 'id', type: Number })
+    @ApiConsumes('multipart/form-data')
+    @ApiBody({
+        schema: {
+            type: 'object',
+            properties: {
+                file: { type: 'string', format: 'binary' },
+            },
+            required: ['file'],
+        },
+    })
+    @ApiResponse({ status: 200, description: 'Файл загружен, URL записан в imageUrl', type: ObjectResponseDto })
+    @ApiResponse({ status: 400, description: 'Некорректный файл (формат/размер)' })
+    @ApiResponse({ status: 401, description: 'Требуется аутентификация' })
+    @ApiResponse({ status: 403, description: 'Требуется роль admin' })
+    @ApiResponse({ status: 404, description: 'Объект не найден' })
+    @ApiResponse({ status: 503, description: 'Object Storage не настроен' })
+    async uploadImage(
+        @Param('id', ParseIntPipe) id: number,
+        @UploadedFile(
+            new ParseFilePipeBuilder()
+                .addFileTypeValidator({ fileType: /^image\/(png|jpeg|jpg|webp|gif)$/ })
+                .addMaxSizeValidator({ maxSize: 5 * 1024 * 1024 })
+                .build({ errorHttpStatusCode: HttpStatus.BAD_REQUEST }),
+        )
+        file: Express.Multer.File,
+    ): Promise<ObjectResponseDto> {
+        await this.objectsService.findOneOrFail(id);
+
+        const uploaded = await this.storageService.upload(
+            file.buffer,
+            file.originalname,
+            file.mimetype,
+        );
+
+        return this.objectsService.update(id, {
+            imageUrl: uploaded.url,
+            imageAlt: file.originalname,
+        });
     }
 }

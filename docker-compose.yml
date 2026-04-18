@@ -57,6 +57,12 @@ services:
       SUPERTOKENS_APP_NAME: "Leningrad After Victory"
       SUPERTOKENS_API_DOMAIN: http://localhost:3080
       SUPERTOKENS_WEBSITE_DOMAIN: http://localhost:3080
+      # Yandex Object Storage (ЛР6) — значения берутся из .env файла на хосте
+      YC_ACCESS_KEY_ID: ${YC_ACCESS_KEY_ID:-}
+      YC_SECRET_ACCESS_KEY: ${YC_SECRET_ACCESS_KEY:-}
+      YC_BUCKET: ${YC_BUCKET:-}
+      YC_ENDPOINT: ${YC_ENDPOINT:-https://storage.yandexcloud.net}
+      YC_REGION: ${YC_REGION:-ru-central1}
     depends_on:
       db:
         condition: service_healthy
