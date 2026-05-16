@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6090BD"/>
+      <stop offset="100%" stop-color="#CDDDE5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="600" fill="url(#sky)"/>
+  <rect y="530" width="1024" height="70" fill="#7A8676"/>
+  <!-- центральное здание -->
+  <rect x="430" y="370" width="164" height="160" fill="#D5CFB8"/>
+  <!-- барабан -->
+  <rect x="460" y="290" width="104" height="80" fill="#D5CFB8"/>
+  <!-- зелёный купол -->
+  <ellipse cx="512" cy="290" rx="60" ry="55" fill="#3C5C44"/>
+  <path d="M 452 290 Q 452 215, 512 195 Q 572 215, 572 290 Z" fill="#3C5C44"/>
+  <!-- крест -->
+  <rect x="510" y="135" width="4" height="60" fill="#D4A24A"/>
+  <rect x="500" y="150" width="24" height="4" fill="#D4A24A"/>
+  <!-- лантерн -->
+  <ellipse cx="512" cy="200" rx="14" ry="10" fill="#D4A24A"/>
+  <!-- колоннада левая -->
+  <g fill="#E2DCC8">
+    <path d="M 50 530 Q 230 380, 430 380 L 430 530 Z" fill="#D5CFB8"/>
+    <rect x="80"  y="430" width="14" height="100"/>
+    <rect x="110" y="425" width="14" height="105"/>
+    <rect x="140" y="420" width="14" height="110"/>
+    <rect x="170" y="415" width="14" height="115"/>
+    <rect x="200" y="410" width="14" height="120"/>
+    <rect x="230" y="405" width="14" height="125"/>
+    <rect x="260" y="400" width="14" height="130"/>
+    <rect x="290" y="395" width="14" height="135"/>
+    <rect x="320" y="390" width="14" height="140"/>
+    <rect x="350" y="385" width="14" height="145"/>
+    <rect x="380" y="382" width="14" height="148"/>
+    <rect x="410" y="380" width="14" height="150"/>
+  </g>
+  <!-- колоннада правая (симметрично) -->
+  <g fill="#E2DCC8">
+    <path d="M 974 530 Q 794 380, 594 380 L 594 530 Z" fill="#D5CFB8"/>
+    <rect x="610" y="380" width="14" height="150"/>
+    <rect x="640" y="382" width="14" height="148"/>
+    <rect x="670" y="385" width="14" height="145"/>
+    <rect x="700" y="390" width="14" height="140"/>
+    <rect x="730" y="395" width="14" height="135"/>
+    <rect x="760" y="400" width="14" height="130"/>
+    <rect x="790" y="405" width="14" height="125"/>
+    <rect x="820" y="410" width="14" height="120"/>
+    <rect x="850" y="415" width="14" height="115"/>
+    <rect x="880" y="420" width="14" height="110"/>
+    <rect x="910" y="425" width="14" height="105"/>
+    <rect x="940" y="430" width="14" height="100"/>
+  </g>
+  <!-- окна центра -->
+  <g fill="#A0846C">
+    <rect x="475" y="305" width="14" height="50" rx="2"/>
+    <rect x="505" y="305" width="14" height="50" rx="2"/>
+    <rect x="535" y="305" width="14" height="50" rx="2"/>
+    <rect x="445" y="395" width="14" height="50" rx="2"/>
+    <rect x="565" y="395" width="14" height="50" rx="2"/>
+    <rect x="500" y="450" width="24" height="80" rx="4"/>
+  </g>
+  <!-- название -->
+  <text x="512" y="65" font-family="'Geologica',sans-serif" font-size="38" font-weight="700" text-anchor="middle" fill="#fff">Казанский собор</text>
+  <text x="512" y="100" font-family="'Geologica',sans-serif" font-size="20" text-anchor="middle" fill="#E6EEF5">1811 · Невский проспект, архитектор Воронихин</text>
+</svg>

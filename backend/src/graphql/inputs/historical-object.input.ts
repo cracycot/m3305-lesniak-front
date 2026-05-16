@@ -17,9 +17,9 @@ export class CreateHistoricalObjectInput {
     @MaxLength(255)
     title: string;
 
-    @Field(() => Int, { description: 'Год создания (>= 1800)' })
+    @Field(() => Int, { description: 'Год создания (>= 1000)' })
     @IsInt()
-    @Min(1800)
+    @Min(1000)
     year: number;
 
     @Field({ nullable: true, description: 'URL изображения' })
@@ -67,7 +67,7 @@ export class UpdateHistoricalObjectInput {
     @Field(() => Int, { nullable: true, description: 'Новый год создания' })
     @IsOptional()
     @IsInt()
-    @Min(1800)
+    @Min(1000)
     year?: number;
 
     @Field({ nullable: true, description: 'Новый URL изображения' })

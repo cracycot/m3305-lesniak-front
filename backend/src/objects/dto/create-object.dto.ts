@@ -16,9 +16,9 @@ export class CreateObjectDto {
     @MaxLength(255)
     title: string;
 
-    @ApiProperty({ description: 'Год создания', minimum: 1800 })
+    @ApiProperty({ description: 'Год создания', minimum: 1000 })
     @IsInt()
-    @Min(1800)
+    @Min(1000)
     year: number;
 
     @ApiPropertyOptional({ description: 'URL изображения' })

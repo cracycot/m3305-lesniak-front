@@ -15,10 +15,10 @@ export class UpdateObjectDto {
     @MaxLength(255)
     title?: string;
 
-    @ApiPropertyOptional({ description: 'Год создания', minimum: 1800 })
+    @ApiPropertyOptional({ description: 'Год создания', minimum: 1000 })
     @IsOptional()
     @IsInt()
-    @Min(1800)
+    @Min(1000)
     year?: number;
 
     @ApiPropertyOptional({ description: 'URL изображения' })

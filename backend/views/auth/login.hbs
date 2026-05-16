@@ -3,10 +3,10 @@
     <h1>Вход в систему</h1>
 
     {{#if error}}
-    <p class="error-message">
+    <div class="form-error" role="alert">
         {{#eq error "invalid_credentials"}}Неверный email или пароль.{{/eq}}
         {{#eq error "service_unavailable"}}Сервис аутентификации временно недоступен.{{/eq}}
-    </p>
+    </div>
     {{/if}}
 
     <form method="POST" action="/auth/login" class="auth-form">

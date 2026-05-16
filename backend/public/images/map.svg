@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#D4CDB6" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="400" fill="#F1ECD9"/>
+  <rect width="900" height="400" fill="url(#grid)"/>
+  <!-- Нева — широкая S-образная река -->
+  <path d="M 0 280 Q 200 260, 380 240 Q 480 230, 600 200 Q 720 175, 900 165"
+        stroke="#7FA5C0" stroke-width="40" fill="none" stroke-linecap="round"/>
+  <path d="M 0 280 Q 200 260, 380 240 Q 480 230, 600 200 Q 720 175, 900 165"
+        stroke="#A6C8DF" stroke-width="36" fill="none" stroke-linecap="round"/>
+  <!-- ответвление Малой Невы -->
+  <path d="M 380 240 Q 400 180, 460 130 Q 520 90, 600 80"
+        stroke="#A6C8DF" stroke-width="22" fill="none" stroke-linecap="round"/>
+  <!-- зелень парков -->
+  <ellipse cx="540" cy="320" rx="80" ry="40" fill="#9EBF82" opacity="0.6"/>
+  <ellipse cx="760" cy="290" rx="70" ry="35" fill="#9EBF82" opacity="0.6"/>
+  <!-- точки достопримечательностей -->
+  <g>
+    <!-- Эрмитаж -->
+    <circle cx="500" cy="225" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <text x="500" y="210" font-family="'Geologica',sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1A3A55">Эрмитаж</text>
+    <!-- Петропавловская крепость -->
+    <circle cx="460" cy="170" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <text x="460" y="155" font-family="'Geologica',sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1A3A55">Петропавловка</text>
+    <!-- Исаакий -->
+    <circle cx="520" cy="270" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <text x="520" y="295" font-family="'Geologica',sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1A3A55">Исаакий</text>
+    <!-- Казанский -->
+    <circle cx="610" cy="265" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <text x="610" y="290" font-family="'Geologica',sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1A3A55">Казанский собор</text>
+    <!-- Спас на Крови -->
+    <circle cx="570" cy="230" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <text x="572" y="215" font-family="'Geologica',sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1A3A55">Спас на Крови</text>
+    <!-- Александровская колонна -->
+    <circle cx="540" cy="245" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <!-- Дворцовый мост -->
+    <circle cx="480" cy="225" r="9" fill="#D14B3E" stroke="#fff" stroke-width="3"/>
+    <text x="455" y="245" font-family="'Geologica',sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#7A2A20">Дворцовый мост</text>
+    <!-- Петергоф (за пределами карты, индикатор юго-запад) -->
+    <circle cx="80" cy="350" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <text x="80" y="335" font-family="'Geologica',sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1A3A55">Петергоф ←</text>
+    <!-- Монумент защитникам -->
+    <circle cx="760" cy="350" r="9" fill="#0D74BD" stroke="#fff" stroke-width="3"/>
+    <text x="760" y="335" font-family="'Geologica',sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1A3A55">Монумент защитникам</text>
+  </g>
+  <!-- compass rose -->
+  <g transform="translate(840,50)">
+    <circle cx="0" cy="0" r="22" fill="#fff" stroke="#0D74BD" stroke-width="2"/>
+    <polygon points="0,-18 4,0 0,18 -4,0" fill="#0D74BD"/>
+    <text x="0" y="-26" font-family="'Geologica',sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#0D74BD">С</text>
+  </g>
+  <!-- легенда -->
+  <g transform="translate(30,30)">
+    <rect width="200" height="60" rx="8" fill="#fff" stroke="#D4CDB6"/>
+    <text x="14" y="22" font-family="'Geologica',sans-serif" font-size="13" font-weight="700" fill="#1A3A55">Карта объектов</text>
+    <circle cx="22" cy="42" r="6" fill="#0D74BD"/>
+    <text x="36" y="46" font-family="'Geologica',sans-serif" font-size="11" fill="#3A5878">здание/памятник</text>
+    <circle cx="118" cy="42" r="6" fill="#D14B3E"/>
+    <text x="132" y="46" font-family="'Geologica',sans-serif" font-size="11" fill="#3A5878">мост</text>
+  </g>
+</svg>

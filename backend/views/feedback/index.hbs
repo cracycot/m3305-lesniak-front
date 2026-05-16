@@ -16,7 +16,7 @@
             </header>
             <p>{{message}}</p>
             <div class="card-actions">
-                <form method="POST" action="/feedback/{{id}}/delete" style="display:inline">
+                <form method="POST" action="/feedback/{{id}}/delete" class="inline-form">
                     <button type="submit" class="btn btn-danger"
                         onclick="return confirm('Удалить сообщение?')">Удалить</button>
                 </form>

@@ -3,11 +3,11 @@
     <h1>Регистрация</h1>
 
     {{#if error}}
-    <p class="error-message">
+    <div class="form-error" role="alert">
         {{#eq error "email_exists"}}Пользователь с таким email уже существует.{{/eq}}
         {{#eq error "failed"}}Ошибка регистрации. Попробуйте ещё раз.{{/eq}}
         {{#eq error "service_unavailable"}}Сервис аутентификации временно недоступен.{{/eq}}
-    </p>
+    </div>
     {{/if}}
 
     <form method="POST" action="/auth/register" class="auth-form">

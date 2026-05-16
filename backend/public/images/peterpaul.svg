@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8DB1D1"/>
+      <stop offset="100%" stop-color="#D8E2EC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="600" fill="url(#sky)"/>
+  <!-- Нева -->
+  <rect y="500" width="1024" height="100" fill="#647B92"/>
+  <rect y="500" width="1024" height="6" fill="#86A0B8" opacity="0.6"/>
+  <!-- крепостная стена -->
+  <rect x="80" y="420" width="864" height="100" fill="#C45520"/>
+  <rect x="80" y="415" width="864" height="10" fill="#9C4218"/>
+  <!-- зубчатая стена -->
+  <g fill="#C45520">
+    <rect x="80"  y="405" width="20" height="15"/>
+    <rect x="120" y="405" width="20" height="15"/>
+    <rect x="160" y="405" width="20" height="15"/>
+    <rect x="200" y="405" width="20" height="15"/>
+    <rect x="240" y="405" width="20" height="15"/>
+    <rect x="280" y="405" width="20" height="15"/>
+    <rect x="320" y="405" width="20" height="15"/>
+    <rect x="360" y="405" width="20" height="15"/>
+    <rect x="700" y="405" width="20" height="15"/>
+    <rect x="740" y="405" width="20" height="15"/>
+    <rect x="780" y="405" width="20" height="15"/>
+    <rect x="820" y="405" width="20" height="15"/>
+    <rect x="860" y="405" width="20" height="15"/>
+    <rect x="900" y="405" width="20" height="15"/>
+  </g>
+  <!-- собор по центру -->
+  <rect x="430" y="380" width="164" height="140" fill="#E2DCC8"/>
+  <rect x="450" y="350" width="124" height="180" fill="#E2DCC8"/>
+  <!-- колокольня -->
+  <rect x="490" y="260" width="44" height="120" fill="#E2DCC8"/>
+  <rect x="495" y="230" width="34" height="40" fill="#E2DCC8"/>
+  <!-- купол колокольни -->
+  <path d="M 495 230 L 530 230 L 535 200 L 490 200 Z" fill="#D4A24A"/>
+  <ellipse cx="512" cy="200" rx="22" ry="14" fill="#D4A24A"/>
+  <!-- шпиль -->
+  <polygon points="512,30 504,200 520,200" fill="#D4A24A"/>
+  <!-- ангел -->
+  <circle cx="512" cy="25" r="6" fill="#F0D670"/>
+  <path d="M 506 25 L 504 12 L 510 12 Z" fill="#F0D670"/>
+  <path d="M 518 25 L 520 12 L 514 12 Z" fill="#F0D670"/>
+  <!-- окна -->
+  <g fill="#A0846C">
+    <rect x="445" y="395" width="14" height="40" rx="2"/>
+    <rect x="470" y="395" width="14" height="40" rx="2"/>
+    <rect x="540" y="395" width="14" height="40" rx="2"/>
+    <rect x="565" y="395" width="14" height="40" rx="2"/>
+    <rect x="500" y="370" width="24" height="20" rx="2"/>
+    <rect x="500" y="290" width="24" height="40" rx="2"/>
+  </g>
+  <!-- название -->
+  <text x="512" y="120" font-family="'Geologica',sans-serif" font-size="34" font-weight="700" text-anchor="middle" fill="#fff">Петропавловская крепость</text>
+  <text x="512" y="155" font-family="'Geologica',sans-serif" font-size="20" text-anchor="middle" fill="#E6EEF5">1703 · сердце Санкт-Петербурга</text>
+</svg>

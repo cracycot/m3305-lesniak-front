@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1B2A45"/>
+      <stop offset="50%" stop-color="#4A5C7D"/>
+      <stop offset="100%" stop-color="#D4A050"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="600" fill="url(#sky)"/>
+  <!-- закатное отражение в воде -->
+  <rect y="430" width="1024" height="170" fill="#2A4060"/>
+  <ellipse cx="512" cy="430" rx="600" ry="20" fill="#D4A050" opacity="0.4"/>
+  <!-- разведённые крылья моста -->
+  <polygon points="80,430 380,430 380,300 320,310 240,330 80,380" fill="#1B2435"/>
+  <polygon points="944,430 644,430 644,300 704,310 784,330 944,380" fill="#1B2435"/>
+  <!-- опоры -->
+  <rect x="60" y="380" width="40" height="60" fill="#3D4A60"/>
+  <rect x="924" y="380" width="40" height="60" fill="#3D4A60"/>
+  <rect x="370" y="420" width="20" height="40" fill="#3D4A60"/>
+  <rect x="634" y="420" width="20" height="40" fill="#3D4A60"/>
+  <!-- ограждение моста (силуэт) -->
+  <g stroke="#1B2435" stroke-width="3" fill="none">
+    <line x1="80" y1="420" x2="100" y2="410"/>
+    <line x1="100" y1="410" x2="140" y2="400"/>
+    <line x1="140" y1="400" x2="200" y2="395"/>
+    <line x1="200" y1="395" x2="280" y2="395"/>
+    <line x1="280" y1="395" x2="380" y2="395"/>
+    <line x1="644" y1="395" x2="720" y2="395"/>
+    <line x1="720" y1="395" x2="800" y2="395"/>
+    <line x1="800" y1="395" x2="900" y2="400"/>
+    <line x1="900" y1="400" x2="944" y2="420"/>
+  </g>
+  <!-- силуэты зданий по бокам -->
+  <rect x="0" y="370" width="60" height="60" fill="#1B2435"/>
+  <rect x="20" y="350" width="20" height="20" fill="#1B2435"/>
+  <rect x="964" y="370" width="60" height="60" fill="#1B2435"/>
+  <!-- купола Эрмитажа справа на горизонте -->
+  <ellipse cx="990" cy="370" rx="14" ry="10" fill="#1B2435"/>
+  <!-- огни на отражении -->
+  <g fill="#F0D670" opacity="0.8">
+    <circle cx="200" cy="450" r="2"/>
+    <circle cx="280" cy="455" r="2"/>
+    <circle cx="380" cy="445" r="3"/>
+    <circle cx="500" cy="450" r="2"/>
+    <circle cx="600" cy="450" r="2"/>
+    <circle cx="700" cy="445" r="3"/>
+    <circle cx="800" cy="455" r="2"/>
+  </g>
+  <!-- название -->
+  <text x="512" y="80" font-family="'Geologica',sans-serif" font-size="38" font-weight="700" text-anchor="middle" fill="#fff">Дворцовый мост</text>
+  <text x="512" y="115" font-family="'Geologica',sans-serif" font-size="20" text-anchor="middle" fill="#EBD7B0">1916 · разводной мост через Большую Неву</text>
+</svg>

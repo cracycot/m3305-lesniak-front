@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A6CDE5"/>
+      <stop offset="100%" stop-color="#E0E8C7"/>
+    </linearGradient>
+    <linearGradient id="palace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8C570"/>
+      <stop offset="100%" stop-color="#C29A48"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="600" fill="url(#sky)"/>
+  <!-- зелёный газон -->
+  <rect y="430" width="1024" height="170" fill="#6B8E58"/>
+  <!-- Большой Петергофский дворец -->
+  <rect x="120" y="300" width="784" height="160" fill="url(#palace)"/>
+  <!-- центральный ризалит -->
+  <rect x="420" y="260" width="184" height="200" fill="#D4A958"/>
+  <!-- крыша -->
+  <polygon points="420,260 512,200 604,260" fill="#6B5230"/>
+  <!-- купол -->
+  <ellipse cx="512" cy="195" rx="20" ry="14" fill="#D4A24A"/>
+  <rect x="510" y="155" width="4" height="40" fill="#D4A24A"/>
+  <!-- зелёная крыша -->
+  <rect x="120" y="295" width="784" height="10" fill="#3E5B3A"/>
+  <!-- окна по фасаду -->
+  <g fill="#FAEFCC">
+    <rect x="150" y="320" width="18" height="50" rx="2"/>
+    <rect x="180" y="320" width="18" height="50" rx="2"/>
+    <rect x="210" y="320" width="18" height="50" rx="2"/>
+    <rect x="240" y="320" width="18" height="50" rx="2"/>
+    <rect x="270" y="320" width="18" height="50" rx="2"/>
+    <rect x="300" y="320" width="18" height="50" rx="2"/>
+    <rect x="330" y="320" width="18" height="50" rx="2"/>
+    <rect x="360" y="320" width="18" height="50" rx="2"/>
+    <rect x="390" y="320" width="18" height="50" rx="2"/>
+    <rect x="440" y="290" width="20" height="60" rx="2"/>
+    <rect x="475" y="290" width="20" height="60" rx="2"/>
+    <rect x="510" y="290" width="20" height="60" rx="2"/>
+    <rect x="545" y="290" width="20" height="60" rx="2"/>
+    <rect x="580" y="290" width="20" height="60" rx="2"/>
+    <rect x="620" y="320" width="18" height="50" rx="2"/>
+    <rect x="650" y="320" width="18" height="50" rx="2"/>
+    <rect x="680" y="320" width="18" height="50" rx="2"/>
+    <rect x="710" y="320" width="18" height="50" rx="2"/>
+    <rect x="740" y="320" width="18" height="50" rx="2"/>
+    <rect x="770" y="320" width="18" height="50" rx="2"/>
+    <rect x="800" y="320" width="18" height="50" rx="2"/>
+    <rect x="830" y="320" width="18" height="50" rx="2"/>
+    <rect x="860" y="320" width="18" height="50" rx="2"/>
+  </g>
+  <!-- Большой каскад -->
+  <rect x="412" y="400" width="200" height="120" fill="#8DAAC5"/>
+  <rect x="412" y="400" width="200" height="10" fill="#6B89A6"/>
+  <!-- фонтан Самсон -->
+  <rect x="500" y="380" width="24" height="40" fill="#D4A24A"/>
+  <!-- струи -->
+  <g stroke="#B5D4E5" stroke-width="3" fill="none" opacity="0.8">
+    <path d="M 512 380 Q 512 320, 512 280"/>
+    <path d="M 460 410 Q 460 360, 460 320"/>
+    <path d="M 565 410 Q 565 360, 565 320"/>
+    <path d="M 420 420 Q 420 380, 420 350"/>
+    <path d="M 605 420 Q 605 380, 605 350"/>
+  </g>
+  <!-- название -->
+  <text x="512" y="65" font-family="'Geologica',sans-serif" font-size="38" font-weight="700" text-anchor="middle" fill="#1a3a55">Петергоф</text>
+  <text x="512" y="100" font-family="'Geologica',sans-serif" font-size="20" text-anchor="middle" fill="#3a5878">1714 · загородная резиденция русских царей</text>
+</svg>

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7BB6E5"/>
+      <stop offset="60%" stop-color="#B7D7EC"/>
+      <stop offset="100%" stop-color="#E8E2D0"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3E7BB8"/>
+      <stop offset="100%" stop-color="#2D5C8F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="600" fill="url(#sky)"/>
+  <!-- Невa -->
+  <rect y="510" width="1024" height="90" fill="#5A7B96"/>
+  <rect y="510" width="1024" height="6" fill="#7295B0" opacity="0.6"/>
+  <!-- Зимний дворец: длинный фасад -->
+  <rect x="60" y="280" width="904" height="230" fill="url(#wall)"/>
+  <!-- ризалиты -->
+  <rect x="60" y="260" width="120" height="250" fill="#3E7BB8"/>
+  <rect x="844" y="260" width="120" height="250" fill="#3E7BB8"/>
+  <rect x="452" y="240" width="120" height="270" fill="#3E7BB8"/>
+  <!-- белая отделка карниз -->
+  <rect x="60" y="275" width="904" height="14" fill="#E8E2D0"/>
+  <rect x="60" y="500" width="904" height="10" fill="#E8E2D0"/>
+  <!-- окна (3 ряда × N) -->
+  <g fill="#E8E2D0">
+    <!-- верхний ряд -->
+    <rect x="80"  y="310" width="14" height="38" rx="2"/>
+    <rect x="110" y="310" width="14" height="38" rx="2"/>
+    <rect x="140" y="310" width="14" height="38" rx="2"/>
+    <rect x="200" y="310" width="14" height="38" rx="2"/>
+    <rect x="230" y="310" width="14" height="38" rx="2"/>
+    <rect x="260" y="310" width="14" height="38" rx="2"/>
+    <rect x="290" y="310" width="14" height="38" rx="2"/>
+    <rect x="320" y="310" width="14" height="38" rx="2"/>
+    <rect x="350" y="310" width="14" height="38" rx="2"/>
+    <rect x="380" y="310" width="14" height="38" rx="2"/>
+    <rect x="410" y="310" width="14" height="38" rx="2"/>
+    <rect x="475" y="305" width="14" height="44" rx="2"/>
+    <rect x="500" y="305" width="14" height="44" rx="2"/>
+    <rect x="525" y="305" width="14" height="44" rx="2"/>
+    <rect x="610" y="310" width="14" height="38" rx="2"/>
+    <rect x="640" y="310" width="14" height="38" rx="2"/>
+    <rect x="670" y="310" width="14" height="38" rx="2"/>
+    <rect x="700" y="310" width="14" height="38" rx="2"/>
+    <rect x="730" y="310" width="14" height="38" rx="2"/>
+    <rect x="760" y="310" width="14" height="38" rx="2"/>
+    <rect x="790" y="310" width="14" height="38" rx="2"/>
+    <rect x="820" y="310" width="14" height="38" rx="2"/>
+    <rect x="864" y="310" width="14" height="38" rx="2"/>
+    <rect x="894" y="310" width="14" height="38" rx="2"/>
+    <rect x="924" y="310" width="14" height="38" rx="2"/>
+    <!-- средний ряд -->
+    <rect x="80"  y="380" width="14" height="38" rx="2"/>
+    <rect x="110" y="380" width="14" height="38" rx="2"/>
+    <rect x="140" y="380" width="14" height="38" rx="2"/>
+    <rect x="200" y="380" width="14" height="38" rx="2"/>
+    <rect x="230" y="380" width="14" height="38" rx="2"/>
+    <rect x="260" y="380" width="14" height="38" rx="2"/>
+    <rect x="290" y="380" width="14" height="38" rx="2"/>
+    <rect x="320" y="380" width="14" height="38" rx="2"/>
+    <rect x="350" y="380" width="14" height="38" rx="2"/>
+    <rect x="380" y="380" width="14" height="38" rx="2"/>
+    <rect x="410" y="380" width="14" height="38" rx="2"/>
+    <rect x="475" y="380" width="14" height="44" rx="2"/>
+    <rect x="500" y="380" width="14" height="44" rx="2"/>
+    <rect x="525" y="380" width="14" height="44" rx="2"/>
+    <rect x="610" y="380" width="14" height="38" rx="2"/>
+    <rect x="640" y="380" width="14" height="38" rx="2"/>
+    <rect x="670" y="380" width="14" height="38" rx="2"/>
+    <rect x="700" y="380" width="14" height="38" rx="2"/>
+    <rect x="730" y="380" width="14" height="38" rx="2"/>
+    <rect x="760" y="380" width="14" height="38" rx="2"/>
+    <rect x="790" y="380" width="14" height="38" rx="2"/>
+    <rect x="820" y="380" width="14" height="38" rx="2"/>
+    <rect x="864" y="380" width="14" height="38" rx="2"/>
+    <rect x="894" y="380" width="14" height="38" rx="2"/>
+    <rect x="924" y="380" width="14" height="38" rx="2"/>
+  </g>
+  <!-- скульптуры на крыше центра -->
+  <g fill="#E8E2D0">
+    <rect x="475" y="225" width="6" height="15"/>
+    <rect x="495" y="220" width="6" height="20"/>
+    <rect x="515" y="222" width="6" height="18"/>
+    <rect x="535" y="225" width="6" height="15"/>
+  </g>
+  <!-- название -->
+  <text x="512" y="65" font-family="'Geologica',sans-serif" font-size="38" font-weight="700" text-anchor="middle" fill="#1a3a55">Государственный Эрмитаж</text>
+  <text x="512" y="105" font-family="'Geologica',sans-serif" font-size="22" text-anchor="middle" fill="#3a5878">1764 · Зимний дворец на Дворцовой набережной</text>
+</svg>
